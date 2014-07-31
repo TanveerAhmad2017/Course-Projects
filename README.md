@@ -3,6 +3,6 @@ Course-Projects
 
 Code for graduate course projects
 
-- **RMICalendar**
+- **RMICalendar**: CS675 Distributed System
 
-- **PasswordManager**
+- **PasswordManager**: ISA656 Network Security
