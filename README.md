@@ -3,6 +3,6 @@ Course-Projects
 
 Code for graduate course projects
 
-### RMICalendar
+- **RMICalendar**
 
-### PasswordManager
+- **PasswordManager**
