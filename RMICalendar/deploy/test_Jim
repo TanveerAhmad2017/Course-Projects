@@ -1,0 +1,10 @@
+create: Jim
+connect: Jim
+schedule: 10-02-2013 16:45:00;10-25-2013 09:00:00;openEvent;open
+schedule: 10-03-2013 20:56:00;10-03-2013 21:00:00;groupEvent;group;Jim,Bob
+schedule: 10-02-2013 17:00:00;10-05-2013 19:00:00;intersect-Event;group;Jim,Bob
+schedule: 10-01-2013 17:00:00;10-04-2013 19:00:00;noOpenHour-Event;group;Jim,Bob
+schedule: 10-13-2013 17:00:00;10-14-2013 19:00:00;nonExistUser-Event;group;Bob,Jim
+schedule: 10-04-2013 20:59:00;10-04-2013 22:00:00;privateEvent;private
+retrieve: Jim;01-01-2000 00:00:00; 01-01-2090 00:00:00
+

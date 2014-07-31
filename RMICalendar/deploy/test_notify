@@ -1,0 +1,13 @@
+create: huahua
+create: huangxin
+connect: huahua
+schedule: 10-02-2013 16:40:00;10-25-2013 17:00:00;openEvent;open
+connect: huangxin 
+schedule: 10-02-2013 16:45:00;10-25-2013 09:00:00;openEvent;open
+schedule: 10-04-2013 21:08:00;10-14-2013 22:00:00;huangxinEvent;private
+retrieve: huangxin;01-01-2000 00:00:00; 01-01-2090 00:00:00
+connect: huahua
+retrieve: huangxin;01-01-2000 00:00:00; 01-01-2090 00:00:00
+schedule: 10-04-2013 21:08:00;10-14-2013 22:00:00;huahuaEvent;private
+
+

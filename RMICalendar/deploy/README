@@ -1,0 +1,27 @@
+
+
+################### TEST ###########################
+1. #command:
+   test: test_Bob
+
+   #function:
+   create user calendar
+   connect to calendar object
+   retrieve event(can only retrieve other's private event)
+
+2. #command:
+   test: test_Alice
+   
+   #function
+   schedule group event 
+	-success
+	-non open event available
+        -time interaction
+ 	-user not exist
+  
+
+3. Other(manually)
+   delete
+   update event
+   list
+   myEventList 

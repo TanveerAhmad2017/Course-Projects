@@ -1,0 +1,9 @@
+create: huahua
+create: huangxin
+create: xueba
+connect: huahua
+add: 09-28-2013 04:00:00;09-29-2013 09:00:00;groupEvent;group;huahua,huangxin,xueba
+add: 09-28-2013 04:00:00;09-29-2013 09:00:00;myEvent;private
+connect: xueba
+retrieve: huahua;01-01-2000 00:00:00; 01-01-2090 00:00:00
+retrieve: xueba;01-01-2000 00:00:00; 01-01-2090 00:00:00

@@ -1,0 +1,6 @@
+create: Bob
+create: Alice
+connect: Bob
+schedule: 10-02-2013 16:40:00;10-25-2013 17:00:00;openEvent;open
+retrieve: Alice;01-01-2000 00:00:00; 01-01-2090 00:00:00
+
