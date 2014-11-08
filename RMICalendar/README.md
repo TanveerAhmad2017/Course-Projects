@@ -1,6 +1,6 @@
 ## RMICalendar
 
-- Course Project for CS675, 2013 Fall
+- Course Project for CS675 Distributed Systems, 2013 Fall
 
 ### Objective
 The goal of this project is to practise the use of a **middleware** technology for constructing distributed applications by building a calendar tool for work groups. The calendar tools have the following functions
