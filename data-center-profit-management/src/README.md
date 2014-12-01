@@ -1,8 +1,9 @@
 ## Source Code
 
 ### Code
-
-- [offline-opt.lg4](./offline-opt.lg4): Integer Nonlinear Programming (INLP) formulation of the offline problem of maximizing profit.
+|file| content|
+|:---|:-------|
+|[offline-opt.lg4](./offline-opt.lg4)| Integer Nonlinear Programming (INLP) formulation of the offline problem of maximizing profi|
 
 
 ### Input File
