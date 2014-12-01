@@ -1,12 +1,13 @@
 ## Source Code
 
-### Code
+### File
+##### Code
 |file| content|
 |:---|:-------|
 |[offline-opt.lg4](./offline-opt.lg4)| Integer Nonlinear Programming (INLP) formulation of the offline problem of maximizing profit|
 
 
-### Input File
+##### Input File
 |file| content|
 |:---|:-------|
 |[jobs.txt](./jobs.txt)| each line defines a job (arrive, deadline, process, VM, value)|
@@ -15,9 +16,20 @@
 |[times.txt](./times.txt)| define total time slots|
 
 
-### Output File
+#####  Output File
 |file| content|
 |:---|:-------|
 |[ScheduleJobNum.txt](./ScheduledJobNum.txt)| total number of jobs scheduled|
 |[UsedGreenEnergy.txt](./UsedGreenEnergy.txt)| total amount of green energy used|
 
+
+### How to run
+##### Generate setting
+```
+python generate-setting.py
+```
+
+##### Offline optimal
+- run in Lingo software
+
+##### Heuristic algorithm
