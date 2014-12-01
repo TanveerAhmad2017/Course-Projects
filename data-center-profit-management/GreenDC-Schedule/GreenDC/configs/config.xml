@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GreenSlotPenaltyFact>0.25</GreenSlotPenaltyFact>
+  <Repetition>200</Repetition>
+  <Tinv>1.9799</Tinv>
+  <TimeSlots>480</TimeSlots>
+  <JobNum>250</JobNum>
+  <WeightRange>10</WeightRange>
+  <AvgProcessTime>24</AvgProcessTime>
+  <AvgNodeNum>10</AvgNodeNum>
+  <SlotPerDay>96</SlotPerDay>
+  <DayPrice>0.00455</DayPrice>
+  <NightPrice>0.0028000000000000004</NightPrice>
+  <ClusterNodeNum>100</ClusterNodeNum>
+  <RevenueRate>0.0055</RevenueRate>
+  <SolarLoadFactor>1</SolarLoadFactor>
+  <IsPreemptive>false</IsPreemptive>
+  <NightPortion>0.25</NightPortion>
+  <DayBegin>9</DayBegin>
+  <Seed>2</Seed>
+  <IsSortJobLSTF>false</IsSortJobLSTF>
+  <IsSemiPreemptive>false</IsSemiPreemptive>
+  <ArrivalRate>2</ArrivalRate>
+  <Scale>1</Scale>
+  <SaveFigure>false</SaveFigure>
+  <StaggeredJobSpan>2</StaggeredJobSpan>
+  <EnablePushOut>false</EnablePushOut>
+  <LeadTime>0</LeadTime>
+  <RealTraceJobSpan>96</RealTraceJobSpan>
+  <JobArrivalType>Staggered</JobArrivalType>
+  <JobLengthType>Uniform</JobLengthType>
+  <StartWorkLoad>1</StartWorkLoad>
+  <EndWorkLoad>15</EndWorkLoad>
+  <IsComOpt>false</IsComOpt>
+  <IsFilterLargeJob>false</IsFilterLargeJob>
+  <runOption>compareAlgs</runOption>
+  <outputWorkloadTrace>true</outputWorkloadTrace>
+  <isDeadlineBounded>true</isDeadlineBounded>
+  <OutputToLingo>false</OutputToLingo>
+  <L>0.05</L>
+</Config>

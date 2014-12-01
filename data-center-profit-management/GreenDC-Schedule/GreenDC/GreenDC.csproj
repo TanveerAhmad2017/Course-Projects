@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{09C3E62B-005F-4F9C-B808-59BF277407C3}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GreenSlot</RootNamespace>
+    <AssemblyName>GreenSlot</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Config.cs" />
+    <Compile Include="JobGenerator\FixedJobGenerator.cs" />
+    <Compile Include="JobGenerator\Grid5kThreeJobGenerator.cs" />
+    <Compile Include="JobGenerator\Grid5kTwoJobGenerator.cs" />
+    <Compile Include="JobGenerator\IJobGenerator.cs" />
+    <Compile Include="JobGenerator\IntrepidThreeJobGenerator.cs" />
+    <Compile Include="JobGenerator\IntrepidTwoJobGenerator.cs" />
+    <Compile Include="JobGenerator\JobGeneratorFactory.cs" />
+    <Compile Include="JobGenerator\IntrepidOneJobGenerator.cs" />
+    <Compile Include="Model\JobLengthType.cs" />
+    <Compile Include="Model\JobTrace.cs" />
+    <Compile Include="Model\JobArrivalType.cs" />
+    <Compile Include="JobGenerator\PoissonArrivalJobGenerator.cs" />
+    <Compile Include="JobGenerator\Grid5kOneJobGenerator.cs" />
+    <Compile Include="Model\SimulateResult.cs" />
+    <Compile Include="Model\SolarTrace.cs" />
+    <Compile Include="JobGenerator\StaggeredJobGenerator.cs" />
+    <Compile Include="JobGenerator\UniformArrivalJobGenerator.cs" />
+    <Compile Include="Scheduler\BestFitScheduler.cs" />
+    <Compile Include="Scheduler\CombineSchedulerBase.cs" />
+    <Compile Include="Scheduler\DensityFitScheduler.cs" />
+    <Compile Include="Scheduler\GreenSlotScheduler.cs" />
+    <Compile Include="Scheduler\LeadTimeScheduler.cs" />
+    <Compile Include="Scheduler\RandomChoiceLargeScheduler.cs" />
+    <Compile Include="Scheduler\RandomChoiceSmallScheduler.cs" />
+    <Compile Include="Scheduler\RandomFitScheduler.cs" />
+    <Compile Include="Scheduler\RandomChoiceMediumScheduler.cs" />
+    <Compile Include="Scheduler\WeightedLargeWindowScheduler.cs" />
+    <Compile Include="Scheduler\WeightedSmallWindowScheduler.cs" />
+    <Compile Include="SimOpt.cs" />
+    <Compile Include="Simulations\Sim_RealWorkload Analysis.cs" />
+    <Compile Include="Util\BrownPriceUtil.cs" />
+    <Compile Include="Util\FileUtil.cs" />
+    <Compile Include="Scheduler\FirstFitScheduler.cs" />
+    <Compile Include="Scheduler\IScheduler.cs" />
+    <Compile Include="Model\Job.cs" />
+    <Compile Include="Model\ProblemSetting.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\JobExtension.cs" />
+    <Compile Include="Util\JobUtil.cs" />
+    <Compile Include="Util\LingoUtil.cs" />
+    <Compile Include="Util\RandomGenerator.cs" />
+    <Compile Include="Scheduler\SchedulerBase.cs" />
+    <Compile Include="Scheduler\SchedulerType.cs" />
+    <Compile Include="Model\Cluster.cs" />
+    <Compile Include="Simulator.cs" />
+    <Compile Include="Util\SolarUtil.cs" />
+    <Compile Include="Util\StatisticUtil.cs" />
+    <Compile Include="Util\Timer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\jobs.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
