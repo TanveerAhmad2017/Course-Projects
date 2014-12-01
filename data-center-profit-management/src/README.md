@@ -15,7 +15,7 @@
 |[times.txt](./times.txt)| define total time slots|
 
 
-### Out File
+### Output File
 |file| content|
 |:---|:-------|
 |[ScheduleJobNum.txt](./ScheduledJobNum.txt)| total number of jobs scheduled|
