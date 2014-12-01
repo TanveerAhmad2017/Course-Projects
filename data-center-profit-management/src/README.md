@@ -10,7 +10,7 @@
 |:---|:-------|
 |[jobs.txt](./jobs.txt)| each line defines a job (arrive, deadline, process, VM, value)|
 |[brownPrice.txt](./brownPrice.txt)| brown energy price at each time slot|
-|[solar.txt](./solar.txt)| solar energy at each time slot|
+|[solars.txt](./solars.txt)| solar energy at each time slot|
 |[times.txt](./times.txt)| define total time slots|
 
 
