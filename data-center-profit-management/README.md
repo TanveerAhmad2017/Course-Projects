@@ -1,7 +1,7 @@
 ## Data Center Profit Management
 
 ### Intro
-- CS773 course project
+- CS773 course project, 2014 Fall
 
 ### Objective
 - Design and implement offline algorithm to management profit in data center
