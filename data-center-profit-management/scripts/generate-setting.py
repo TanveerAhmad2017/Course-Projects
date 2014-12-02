@@ -5,12 +5,26 @@ import random
 jobnum = 12
 times = 48
 vmnum = 2
-valuerange = 100
 offpeak = 1
 onpeak = 2
+revenuerate = 10
+
+
+#output vm
+f = open('../data/vm.txt', 'w')
+f.write("%d" %vmnum)
+f.close()
+
+#output revenue rate
+f = open("../data/revenuerate.txt", 'w')
+f.write("%d" %revenuerate)
+f.close()
+
+
+
 
 #output jobs
-f = open('jobs.txt','w')
+f = open('../data/jobs.txt','w')
 
 
 f.write("%s%d%s" %('job1..job', jobnum ,'~\n'))
@@ -20,13 +34,12 @@ for x in range(0,jobnum):
 	deadline = random.randint(arrive, times);
 	process = random.randint(1, deadline-arrive+1)
 	vm = random.randint(1,vmnum)
-	value = random.random()*100
-	f.write('%d %d %d %d %d \n' %(arrive, deadline, process, vm, value))
+	f.write('%d %d %d %d\n' %(arrive, deadline, process, vm))
 f.close()
 
 
 #output time
-f = open('times.txt', 'w')
+f = open('../data/times.txt', 'w')
 
 f.write('%s%d%s' %('time1..time', times, '~\n'))
 
@@ -34,7 +47,7 @@ f.close()
 
 
 #output solar energy
-f = open('solars.txt', 'w')
+f = open('../data/solars.txt', 'w')
 
 f.write('%s%d%s' %('green1..green', times, '~\n'))
 green = [0]*times
@@ -51,7 +64,7 @@ f.close()
 
 
 #output brown energy price
-f = open ('brownPrice.txt', 'w')
+f = open ('../data/brownPrice.txt', 'w')
 f.write('%s%d%s' %('brown1..brown', times, '~\n'))
 brown = [0]*times;
 #day 1 browntime
