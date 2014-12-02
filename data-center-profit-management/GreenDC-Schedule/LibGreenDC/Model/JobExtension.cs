@@ -20,10 +20,22 @@ namespace LibGreenDC
             }
             return jb;
         }
+
+        public static List<Job> DeepClone(this List<Job> self)
+        {
+            var jb = new List<Job>();
+            foreach (var p in self)
+            {
+                jb.Add(p.DeepClone());
+            }
+            return jb;
+        }
         
         public static double GetUsedGreenEnergyByTimeSlot(this List<Job> self, int t)
         {
             return self.Sum(j => j.UsedGreenEnergyByTime[t]);
         }       
+
+
     }
 }

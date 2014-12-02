@@ -17,7 +17,7 @@ namespace LibGreenDC
         public int TimeSlots { get; set; }
         public double RevenueRate { get; set; }
 
-        public List<Job> Jobs { get; set; }
+        //public List<Job> Jobs { get; set; }
         
         public List<double> BrownPriceList { get; set; }
         public List<int> SolarEnergyList { get; set; }
@@ -27,16 +27,18 @@ namespace LibGreenDC
             var ps = new ProblemSetting
             {
                 
-                Jobs = new List<Job>(),
+                //Jobs = new List<Job>(),
                 TimeSlots = this.TimeSlots,
+                ClusterNodeNum = this.ClusterNodeNum,
+                RevenueRate = this.RevenueRate,
                 BrownPriceList = this.BrownPriceList !=null ? new List<double>(this.BrownPriceList) : null,
                 SolarEnergyList = this.SolarEnergyList !=null ? new List<int>(this.SolarEnergyList): null
             };
 
-            Jobs.ForEach(job =>
-                {
-                    ps.Jobs.Add(job.DeepClone());
-                });
+            //Jobs.ForEach(job =>
+            //    {
+            //        ps.Jobs.Add(job.DeepClone());
+            //    });
 
             return ps;
 

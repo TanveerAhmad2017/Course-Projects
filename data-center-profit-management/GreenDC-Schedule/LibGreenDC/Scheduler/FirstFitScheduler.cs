@@ -20,7 +20,7 @@ namespace LibGreenDC.Scheduler
         /// <param name="job"></param>
         public override void ScheduleJob(Job job)
         {            
-            if (CurrentTime + job.ProcessingTime >= this.ProblemSetting.TimeSlots) return;
+            if (CurrentTime + job.ProcessingTime > this.ProblemSetting.TimeSlots) return;
 
             for (int t = this.CurrentTime; t <= job.SlackTime; t++)
             {

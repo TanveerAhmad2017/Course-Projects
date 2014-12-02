@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenDC", "GreenDC\GreenDC.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibGreenDC", "LibGreenDC\LibGreenDC.csproj", "{FA41C887-B169-483E-B61B-315C9913FC76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simulation", "TestLibGreenDC\Simulation.csproj", "{61311B4A-2912-4FA0-B7AB-2AEC616DA628}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simulation", "Simulation\Simulation.csproj", "{61311B4A-2912-4FA0-B7AB-2AEC616DA628}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

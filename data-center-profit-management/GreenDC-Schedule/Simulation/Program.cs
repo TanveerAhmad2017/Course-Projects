@@ -4,42 +4,54 @@ using System.Linq;
 using System.Text;
 using LibGreenDC.Scheduler;
 using LibGreenDC;
+using Simulation.util;
+using Simulation;
 
 namespace TestLibGreenDC
 {
     class Program
     {
+       
         static void Main(string[] args)
         {
-
-            // init ps
             var ps = new ProblemSetting();
-            ps.TimeSlots = 10; // read from file
-            ps.ClusterNodeNum = 20; // read from file
-            ps.RevenueRate = 1.0; // read from file
-            ps.BrownPriceList = new List<double>(); // read from file
-            ps.SolarEnergyList = new List<int>();   // read from file            
+            var jobs = new List<Job>();
             
-            // init ps 
+            FileUtil.ReadData(@"../../../../data/", ref ps,  ref jobs);
 
-            var jobs = new List<Job>(); // read job from file
+            
+            var firstfitscheduler = (IScheduler)new FirstFitScheduler(ps);
 
-            var scheduler = (IScheduler)new FirstFitScheduler(ps);            
+            var simulator = new Simulator(firstfitscheduler, ps, jobs);
 
-            //scheduler.sc
+            var simulationresult = simulator.Simulate();
 
-            for (var t = 0; t < 10; t++)
+
+            simulationresult.ScheduledJobs.ForEach(job =>
             {
-                // create some jobs
-                var currentJob = jobs.Where(j => j.ArrivalTime == t).ToList();
+                Console.WriteLine("sechuled " + job);
+            });
 
-                scheduler.CurrentTime = t;
-                scheduler.AddJobs(currentJob);
-                scheduler.Schedule();
-            }
+            Console.WriteLine("-------------------------------------------------");
 
-            var sechuledJobs = scheduler.GetScheduledJobs();
+            var bestfitscheduler = (IScheduler)new BestFitScheduler(ps);
+            var simulator2 = new Simulator(bestfitscheduler, ps, jobs);
 
+            var simulationresult2 = simulator2.Simulate();
+            simulationresult2.ScheduledJobs.ForEach(job =>
+            {
+                Console.WriteLine("sechuled " + job);
+            });
+
+            
+
+            Console.WriteLine("-------------------------------------------------");
+
+            Console.WriteLine(simulationresult);
+            Console.WriteLine(simulationresult2);
         }
+
+       
+
     }
 }

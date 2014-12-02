@@ -12,6 +12,7 @@ namespace LibGreenDC
     {
 
         #region Properties
+        public List<Job> ScheduledJobList { get; set; }
         public List<Job> CurrentJobList { get; set; }
         public int CurrentTime { get; set; }
 
@@ -19,7 +20,7 @@ namespace LibGreenDC
         public SchedulerType SchedulerType { get; protected set; }
         public ProblemSetting ProblemSetting {get; set;}
 
-        public Dictionary<string, List<SimulateResult>> Results { get; protected set; }
+        //public Dictionary<string, List<SimulateResult>> Results { get; protected set; }
 
         public double RunningTime { get; private set; }
 
@@ -32,11 +33,13 @@ namespace LibGreenDC
 
         public SchedulerBase(ProblemSetting ps)
         {                       
+            this.ProblemSetting = ps.Clone(); 
             CurrentJobList = new List<Job>();
+            this.ScheduledJobList = new List<Job>();
             Cluster = new Cluster(this.ProblemSetting.TimeSlots, this.ProblemSetting.ClusterNodeNum);
-            this.Results = new Dictionary<string, List<SimulateResult>>();
+            //this.Results = new Dictionary<string, List<SimulateResult>>();
             
-            this.ProblemSetting = ps.Clone();        
+                   
         }
 
         /// <summary>
@@ -278,6 +281,12 @@ namespace LibGreenDC
                     // 2. do the assignment
                     this.AssignJob(job);
 
+                    if (job.Scheduled)
+                    {
+                        this.ScheduledJobList.Add(job);
+                    }
+
+
                     // if job can not be sheduled, try to assign it with pushout
 
                     //if (!job.Scheduled && Config.EnablePushOut)
@@ -319,7 +328,7 @@ namespace LibGreenDC
 
         public virtual List<Job> GetScheduledJobs()
         {
-            throw new NotImplementedException();
+            return this.ScheduledJobList;
         }
 
     }

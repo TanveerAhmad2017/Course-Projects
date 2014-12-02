@@ -2,12 +2,13 @@ import sys
 import random
 
 # settings
-jobnum = 12
-times = 48
+jobnum = 10
+times = 24
 vmnum = 2
 offpeak = 1
 onpeak = 2
 revenuerate = 10
+
 
 
 #output vm
@@ -21,7 +22,9 @@ f.write("%d" %revenuerate)
 f.close()
 
 
-
+f = open("../data/totaltimeslots.txt","w")
+f.write("%d" %times)
+f.close()
 
 #output jobs
 f = open('../data/jobs.txt','w')
@@ -33,7 +36,7 @@ for x in range(0,jobnum):
 	arrive = random.randint(1,times);
 	deadline = random.randint(arrive, times);
 	process = random.randint(1, deadline-arrive+1)
-	vm = random.randint(1,vmnum)
+	vm = 1
 	f.write('%d %d %d %d\n' %(arrive, deadline, process, vm))
 f.close()
 

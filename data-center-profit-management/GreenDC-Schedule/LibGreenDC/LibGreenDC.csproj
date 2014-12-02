@@ -46,10 +46,8 @@
     <Compile Include="Model\JobArrivalType.cs" />
     <Compile Include="Model\JobExtension.cs" />
     <Compile Include="Model\JobLengthType.cs" />
-    <Compile Include="Model\JobTrace.cs" />
     <Compile Include="Model\ProblemSetting.cs" />
     <Compile Include="Model\SimulateResult.cs" />
-    <Compile Include="Model\SolarTrace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scheduler\BestFitScheduler.cs" />
     <Compile Include="Scheduler\FirstFitScheduler.cs" />

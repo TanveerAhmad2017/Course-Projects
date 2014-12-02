@@ -41,7 +41,7 @@ namespace LibGreenDC.Scheduler
             this.bestNodeList = new List<int>(); 
             // this.schedulable = false;
 
-            if (CurrentTime + job.ProcessingTime >= this.ProblemSetting.TimeSlots) return;
+            if (CurrentTime + job.ProcessingTime > this.ProblemSetting.TimeSlots) return;
             //find best schedule
             for (int t = CurrentTime; t <= job.SlackTime; t++)
             {

@@ -71,7 +71,7 @@ namespace LibGreenDC
         {
             get
             {
-                return this.Deadline - this.ProcessingTime + this.AssignedTimeSlots;
+                return this.Deadline - this.ProcessingTime + 1 + this.AssignedTimeSlots;
             }
         }
 
@@ -89,7 +89,7 @@ namespace LibGreenDC
         {
             get
             {
-                return this.ProcessingTime * this.RequiredNodes;
+                return this.ProcessingTime * this.RequiredNodes*this.RevenueRate;
             }
         }
 
@@ -109,17 +109,19 @@ namespace LibGreenDC
             this.ScheduledCost = double.MaxValue;
         }
 
-        public Job(int arrivalTime, int deadline, int processingTime, int nodeNum)
-            : base()
+        public Job(int arrivalTime, int deadline, int processingTime, int nodeNum, double revenuerate)
+            : this()
         {
             this.ArrivalTime = arrivalTime;
             this.Deadline = deadline;
             this.ProcessingTime = processingTime;
             this.RequiredNodes = nodeNum;
+            this.RevenueRate = revenuerate;
         }
-        
 
-        public Job(int arrivalTime, int deadline, double weight, double energyCost, int timeCost, int nodeNum) : base()
+
+        public Job(int arrivalTime, int deadline, double weight, double energyCost, int timeCost, int nodeNum)
+            : this()
         {
             this.JobId = -1;
             this.ArrivalTime = arrivalTime;
@@ -191,23 +193,12 @@ namespace LibGreenDC
 
         public Job DeepClone()
         {
-            using (var ms = new MemoryStream())
-            {
-                XmlSerializer xs = new XmlSerializer(typeof(Job));
-                xs.Serialize(ms, this);
-                ms.Flush();
-                ms.Position = 0;
-                var cloned = (Job)xs.Deserialize(ms);
-
-                cloned.Color = this.Color;
-
-                return cloned;
-            }
+            return new Job(this.ArrivalTime, this.Deadline, this.ProcessingTime, this.RequiredNodes, this.RevenueRate);
         }
 
         public override string ToString()
         {
-            return string.Format("JobId = {0} AT = {1} DL = {2} TS = {3} RN = {4} Sc = {5} RV = {6} PT = {7}",
+            return string.Format("JobId = {0} AT = {1} DL = {2} PS = {3} RN = {4} Sc = {5} RV = {6} PT = {7} ST ={8}",
                 this.JobId,
                 this.ArrivalTime,
                 this.Deadline,
@@ -215,7 +206,8 @@ namespace LibGreenDC
                 this.RequiredNodes,
                 this.Scheduled,
                 this.Revenue,
-                this.Profit);
+                this.Profit,
+                this.StartTime);
         }
     }
 
