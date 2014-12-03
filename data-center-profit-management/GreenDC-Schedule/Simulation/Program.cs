@@ -14,12 +14,20 @@ namespace TestLibGreenDC
        
         static void Main(string[] args)
         {
+            String datadir = @"../../../../data/";
+            RunOneSimulation(datadir);
+
+        }
+
+
+        static void RunOneSimulation(String path) {
+
             var ps = new ProblemSetting();
             var jobs = new List<Job>();
-            
-            FileUtil.ReadData(@"../../../../data/", ref ps,  ref jobs);
 
-            
+            FileUtil.ReadData(path, ref ps, ref jobs);
+
+
             var firstfitscheduler = (IScheduler)new FirstFitScheduler(ps);
 
             var simulator = new Simulator(firstfitscheduler, ps, jobs);
@@ -43,12 +51,13 @@ namespace TestLibGreenDC
                 Console.WriteLine("sechuled " + job);
             });
 
-            
+
 
             Console.WriteLine("-------------------------------------------------");
 
             Console.WriteLine(simulationresult);
-            Console.WriteLine(simulationresult2);
+            Console.WriteLine(simulationresult2);       
+        
         }
 
        

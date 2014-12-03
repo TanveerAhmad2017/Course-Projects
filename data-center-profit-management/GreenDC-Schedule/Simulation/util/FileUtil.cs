@@ -83,7 +83,7 @@ namespace Simulation.util
         {
             string[] lines = System.IO.File.ReadAllLines(path);
             List<Job> rnt = new List<Job>();
-            for (int i = 1; i < lines.Length; i++)
+            for (int i = 0; i < lines.Length; i++)
             {
                 string[] items = lines[i].Split(' ');
                 int arriveTime = int.Parse(items[0]);

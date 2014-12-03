@@ -2,14 +2,14 @@ import sys
 import random
 
 # settings
-jobnum = 10
-times = 24
-vmnum = 2
+jobnum = 0
+times = 48
+vmnum = 4
 offpeak = 1
 onpeak = 2
 revenuerate = 10
-
-
+jobavglen = 4
+arrivalrate = (float)(1)/2
 
 #output vm
 f = open('../data/vm.txt', 'w')
@@ -26,26 +26,31 @@ f = open("../data/totaltimeslots.txt","w")
 f.write("%d" %times)
 f.close()
 
+
 #output jobs
 f = open('../data/jobs.txt','w')
-
-
-f.write("%s%d%s" %('job1..job', jobnum ,'~\n'))
-#arrive, deadline, process, VM, value
-for x in range(0,jobnum):
-	arrive = random.randint(1,times);
-	deadline = random.randint(arrive, times);
-	process = random.randint(1, deadline-arrive+1)
+curr = 0
+while curr < times:	
+	#arrive, deadline, process, VM, value
+	curr = (int)(random.expovariate(arrivalrate) + curr)
+	if curr > times:
+		break
+	deadline = random.randint(curr, times);
+	process = random.randint(1, min(jobavglen*2,deadline-curr+1))
 	vm = 1
-	f.write('%d %d %d %d\n' %(arrive, deadline, process, vm))
+	f.write('%d %d %d %d\n' %(curr, deadline, process, vm))
+	jobnum = jobnum+1
 f.close()
 
+print jobnum
+
+f = open('../data/jobnum.txt','w')
+f.write("%s%d%s" %('job1..job', jobnum ,'~\n'))
+f.close()
 
 #output time
 f = open('../data/times.txt', 'w')
-
 f.write('%s%d%s' %('time1..time', times, '~\n'))
-
 f.close()
 
 
@@ -81,3 +86,4 @@ for x in range((int)(len(brown))):
 		brown[x] = offpeak
 	f.write('%d ' %brown[x])
 f.close()
+
