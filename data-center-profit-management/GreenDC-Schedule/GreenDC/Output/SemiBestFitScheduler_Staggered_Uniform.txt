@@ -1,2 +1,0 @@
-%ScheduledJobNum workload ScheduledRevenue UsedGreenEnergy UsedBrownEnergy UsedBrownEnergyCost
-73.3333333333333 36273 115.352516666667 11546.6666666667 24726.3333333333 84.1489833333333 

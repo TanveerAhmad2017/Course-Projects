@@ -1,3 +1,0 @@
-penalty = 0.01, GreenSlot outperform all 3
-penalty = 0.001, GreenSlot behave like BestFit
-penalty = 0.005

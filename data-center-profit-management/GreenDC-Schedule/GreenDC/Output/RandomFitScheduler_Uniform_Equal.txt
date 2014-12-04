@@ -1,2 +1,0 @@
-%ScheduledJobNum workload ScheduledRevenue UsedGreenEnergy UsedBrownEnergy UsedBrownEnergyCost RunningTime
-5.8 742.4 3.17306 495.6 246.8 0.91014 8.51352539915494 
