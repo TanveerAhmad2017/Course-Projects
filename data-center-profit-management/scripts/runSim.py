@@ -30,4 +30,4 @@ def runSim(rep, arrivalrate):
 if __name__ == "__main__":
 	#arrival rate change from 0.1 to 1.5, which corresponds to workload utilization change from 20% to 200%
 	for i in range(1, 16):
-		runSim(rep = 30, arrivalrate = i*0.1)
+		runSim(rep = 60, arrivalrate = i*0.1)
