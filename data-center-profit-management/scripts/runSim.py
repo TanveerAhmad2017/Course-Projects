@@ -10,7 +10,7 @@ def runSim(rep, arrivalrate):
 	
 
 	for i in range(rep):
-		generateSetting(arrivalrate)
+		generateSetting(arrivalrate = arrivalrate)
 	
 		for schedulerName in ['firstfit', 'bestfit']:
 			outputFilePath = "..\\result\\" + schedulerName + "_arrivalrate_" + str(arrivalrate) + ".txt"
@@ -28,5 +28,5 @@ def runSim(rep, arrivalrate):
 
 
 if __name__ == "__main__":
-	for i in range(15):
-		runSim(30, arrivalrate = i*0.1)
+	for i in range(1, 15):
+		runSim(rep = 30, arrivalrate = i*0.1)
