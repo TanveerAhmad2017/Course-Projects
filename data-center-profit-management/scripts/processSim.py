@@ -5,5 +5,5 @@ for i in range(1,16):
 	with open(filename) as f:
 		print filename
 		print i
-	    res = stats(stream = f, field=2, delimiter=' ', skip = 0, confidence=0.95)
-	    print resfilename
+		res = stats(stream = f, field=2, delimiter=' ', skip = 0, confidence=0.95)
+		print resfilename
