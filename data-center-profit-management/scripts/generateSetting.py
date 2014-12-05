@@ -90,7 +90,7 @@ def generateSetting(jobnum=0, times = 48, vmnum = 4, offpeak = 1, onpeak =2, rev
 		f.write('%d ' %brown[x])
 	f.close()
 
-	# print 'jobnum = ', jobnum, 'times = ', times, "vmnum = ", vmnum, "arrivalrate = ", arrivalrate
+	print 'jobnum = ', jobnum, 'times = ', times, "vmnum = ", vmnum, "arrivalrate = ", arrivalrate
 	sys.stdout.write("jobnum {:>2} times {:>2} vmnum {:>2} arrivalrate {:>2}\n".format(jobnum, times, vmnum,arrivalrate))
 
 if __name__ == "__main__":
