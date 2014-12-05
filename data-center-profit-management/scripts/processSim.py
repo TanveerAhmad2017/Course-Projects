@@ -6,6 +6,7 @@ for schedulerName in schedule:
 	error = []
 	for i in range(1,16):
 		filename = '../result/' + schedulerName +'_arrivalrate_'+ str(i*0.1) +'.txt'
+		print filename
 		with open(filename) as f:
 			# print filename
 			res = stats(stream = f, field=2, delimiter=' ', skip = 0, confidence=0.95)
@@ -19,10 +20,12 @@ for schedulerName in schedule:
 
 	outputFileName = '../plot-figure/data/' + schedulerName +'.txt'
 	with open(outputFileName,'w') as f:
-		f.write('a')
-		# f.write(str(average))
-		# f.write(str(error))
-		# f.write('\n')
+		for item in average:
+			f.write(item + " ")
+		f.write('\n')
+		for item in error:
+			f.write(item + " ")
+		f.write('\n')		
 		# for item in error:
 		# 	f.write("%f ", item)
 		# f.write('\n')

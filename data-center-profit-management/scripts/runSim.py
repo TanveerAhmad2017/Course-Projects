@@ -9,7 +9,7 @@ def runSim(rep, arrivalrate):
 	dataPath = "..\\data\\"
 	
 
-	for i in range(rep):
+	for i in range(1,rep+1):
 		generateSetting(arrivalrate = arrivalrate)
 	
 		for schedulerName in ['firstfit', 'bestfit']:
