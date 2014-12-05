@@ -1,7 +1,7 @@
 import sys
 import random
 
-def generateSetting(jobnum=0, times = 48, vmnum = 4, offpeak = 1, onpeak =2, revenuerate = 10, jobavglen =4, arrivalrate = 0.5):
+def generateSetting(jobnum=0, times = 48, vmnum = 4, offpeak = 2, onpeak =4, revenuerate = 10, jobavglen =4, arrivalrate = 0.5):
 	# # settings
 	# jobnum = 0
 	# times = 48

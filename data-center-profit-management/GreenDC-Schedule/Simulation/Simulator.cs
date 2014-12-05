@@ -60,7 +60,8 @@ namespace Simulation
                 UsedGreenEnergy = jobs.Sum(j => j.UsedGreenEnergyAmount),
                 UsedBrownEnergyAmount = jobs.Sum(j => j.UsedBrownEnergyAmount),
                 UsedBrownEnergyCost = jobs.Sum(j => j.UsedBrownEnergyCost),
-                ScheduledJobs = jobs
+                ScheduledJobs = jobs,
+                ScheduledWorkloadUtilization = (double)jobs.Sum(j => j.RequiredNodes*j.ProcessingTime)/this.PS.ClusterNodeNum/this.PS.TimeSlots
             };
             return sr;
         }
@@ -74,12 +75,13 @@ namespace Simulation
         public double UsedBrownEnergyAmount { get; set; }
         public double UsedBrownEnergyCost { get; set; }
         public List<Job> ScheduledJobs { get; set; }
+        public double ScheduledWorkloadUtilization { get; set; }
 
         public override string ToString()
         {
             //return string.Format("{0} SProf = {1} UsedGreen = {2} UsedBrown = {3} UsedBrownCost = {4} ScheJobNum = {5}", SchedulerType, ScheduledProfit, UsedGreenEnergy, UsedBrownEnergyAmount, UsedBrownEnergyCost, ScheduledJobs.Count);
 
-            return string.Format("{0} {1} {2} {3} {4} {5}", SchedulerType, ScheduledProfit, UsedGreenEnergy, UsedBrownEnergyAmount, UsedBrownEnergyCost, ScheduledJobs.Count);
+            return string.Format("{0} {1} {2} {3} {4} {5} {6}", SchedulerType, ScheduledProfit, UsedGreenEnergy, UsedBrownEnergyAmount, UsedBrownEnergyCost, ScheduledJobs.Count, ScheduledWorkloadUtilization);
         }
     }
 

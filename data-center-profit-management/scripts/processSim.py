@@ -1,15 +1,22 @@
 from pystats import *
 
 schedule = ['firstfit', 'bestfit']
+metrix = ['SchedulerType', 'ScheduledProfit', 'UsedGreenEnergy', 'UsedBrownEnergyAmount', 'UsedBrownEnergyCost', 'ScheduledJobs.Count', 'ScheduledWorkloadUtilization']
+# 2: ScheduledProfit
+# 7: ScheduledWorkloadUtilization
+# 3: UsedGreenEnergy
+# 4: UsedBrownEnergyAmount
+# 5: UsedBrownEnergyCost
+
+fieldNum = 2
 for schedulerName in schedule:
 	average = []
 	error = []
 	for i in range(1,16):
 		filename = '../result/' + schedulerName +'_arrivalrate_'+ str(i*0.1) +'.txt'
-		print filename
 		with open(filename) as f:
 			# print filename
-			res = stats(stream = f, field=2, delimiter=' ', skip = 0, confidence=0.95)
+			res = stats(stream = f, field=fieldNum, delimiter=' ', skip = 0, confidence=0.95)
 			# print res
 			# print res[2], res[9][1] - res[2]
 			average.append(res[2])
@@ -18,14 +25,15 @@ for schedulerName in schedule:
 	print average
 	print error
 
-	outputFileName = '../plot-figure/data/' + schedulerName +'.txt'
-	with open(outputFileName,'w') as f:
-		for item in average:
-			f.write(item + " ")
-		f.write('\n')
-		for item in error:
-			f.write(item + " ")
-		f.write('\n')		
+	outputFileName = '../plot-figure/data/' + schedulerName + '_' + metrix[fieldNum-1]+'.txt'
+	f = open(outputFileName,'w')
+	print outputFileName
+	for item in average:
+		f.write("%f " %item )
+	f.write('\n')
+	for item in error:
+		f.write("%f " %item )
+	f.write('\n')		
 		# for item in error:
 		# 	f.write("%f ", item)
 		# f.write('\n')
