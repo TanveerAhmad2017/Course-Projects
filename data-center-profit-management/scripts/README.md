@@ -8,7 +8,7 @@
 
 
 ### Tools used
-- [Python statistic](https://github.com/xizhonghua/pystats)
+- [Python statistic](https://github.com/xizhonghua/pystats): process repeatition result to get mean, variances, confidential interval etc.
 
 ### Generate Simulation Input
 
