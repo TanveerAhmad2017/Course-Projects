@@ -12,4 +12,4 @@
   ```
   plotFFBF(2)
   ```
-  - sample figure:
+- sample figure:
