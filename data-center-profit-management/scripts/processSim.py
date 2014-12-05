@@ -13,7 +13,7 @@ for schedulerName in schedule:
 	average = []
 	error = []
 	for i in range(1,16):
-		filename = '../result/' + schedulerName +'_arrivalrate_'+ str(i*0.1) +'.txt'
+		filename = '../result/' + schedulerName +'_arrivalrate_'+ str(i*0.05) +'.txt'
 		with open(filename) as f:
 			# print filename
 			res = stats(stream = f, field=fieldNum, delimiter=' ', skip = 0, confidence=0.95)
