@@ -15,34 +15,34 @@ namespace Simulation.util
 
             var timeslotString = ReadSingleParameterFromFile(path + "totaltimeslots.txt");
             ps.TimeSlots = Int16.Parse(timeslotString); // read from file
-            Console.WriteLine("timeSlot=" + ps.TimeSlots);
+           // Console.WriteLine("timeSlot=" + ps.TimeSlots);
 
 
 
             ps.ClusterNodeNum = Int16.Parse(ReadSingleParameterFromFile(path + "vm.txt")); // read from file
-            Console.WriteLine("vm=" + ps.ClusterNodeNum);
+            //Console.WriteLine("vm=" + ps.ClusterNodeNum);
 
 
             ps.RevenueRate = Double.Parse(ReadSingleParameterFromFile(path + "revenuerate.txt")); // read from file
-            Console.WriteLine("revenue rate=" + ps.RevenueRate);
+           // Console.WriteLine("revenue rate=" + ps.RevenueRate);
 
 
 
             ps.SolarEnergyList = ReadIntListFromFile(path + "solars.txt");   // read from file 
-            Console.WriteLine("solar energy length" + ps.SolarEnergyList.Count);
-            ps.SolarEnergyList.ForEach(e => Console.Write(e + " "));
-            Console.WriteLine();
+           // Console.WriteLine("solar energy length" + ps.SolarEnergyList.Count);
+          //  ps.SolarEnergyList.ForEach(e => Console.Write(e + " "));
+          //  Console.WriteLine();
 
 
             ps.BrownPriceList = ReadDoubleListFromFile(path + "brownPrice.txt");
-            Console.WriteLine("brown price length" + ps.BrownPriceList.Count);
-            ps.BrownPriceList.ForEach(e => Console.Write(e + " "));
-            Console.WriteLine();
+           // Console.WriteLine("brown price length" + ps.BrownPriceList.Count);
+          //  ps.BrownPriceList.ForEach(e => Console.Write(e + " "));
+           // Console.WriteLine();
 
             // init ps 
             jobs = ReadJobFromFile(path + "jobs.txt", ps.RevenueRate);
-            Console.WriteLine("jobs");
-            jobs.ForEach(j => Console.WriteLine(j.ArrivalTime + " " + j.Deadline + " " + j.ProcessingTime + " " + j.RequiredNodes));
+           // Console.WriteLine("jobs");
+           // jobs.ForEach(j => Console.WriteLine(j.ArrivalTime + " " + j.Deadline + " " + j.ProcessingTime + " " + j.RequiredNodes));
         }
 
         public static String ReadSingleParameterFromFile(String path)

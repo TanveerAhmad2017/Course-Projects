@@ -14,13 +14,15 @@ namespace TestLibGreenDC
        
         static void Main(string[] args)
         {
-            String datadir = @"../../../../data/";
-            RunOneSimulation(datadir);
+           // String datadir = @"../../../../data/";
+            String datadir = args[0];
+            String schedulerName = args[1];
+            RunOneSimulation(datadir, schedulerName);
 
         }
 
 
-        static void RunOneSimulation(String path) {
+        static void RunOneSimulation(String path, string schedulerName) {
 
             var ps = new ProblemSetting();
             var jobs = new List<Job>();
@@ -28,39 +30,17 @@ namespace TestLibGreenDC
             FileUtil.ReadData(path, ref ps, ref jobs);
 
 
-            var firstfitscheduler = (IScheduler)new FirstFitScheduler(ps);
+            IScheduler scheduler = SchedulerFactory.GetScheduler(schedulerName, ps);
 
-            var simulator = new Simulator(firstfitscheduler, ps, jobs);
+
+            var simulator = new Simulator(scheduler, ps, jobs);
 
             var simulationresult = simulator.Simulate();
 
-
-            simulationresult.ScheduledJobs.ForEach(job =>
-            {
-                Console.WriteLine("sechuled " + job);
-            });
-
-            Console.WriteLine("-------------------------------------------------");
-
-            var bestfitscheduler = (IScheduler)new BestFitScheduler(ps);
-            var simulator2 = new Simulator(bestfitscheduler, ps, jobs);
-
-            var simulationresult2 = simulator2.Simulate();
-            simulationresult2.ScheduledJobs.ForEach(job =>
-            {
-                Console.WriteLine("sechuled " + job);
-            });
-
-
-
-            Console.WriteLine("-------------------------------------------------");
-
             Console.WriteLine(simulationresult);
-            Console.WriteLine(simulationresult2);       
-        
-        }
+           
 
-       
+        }
 
     }
 }

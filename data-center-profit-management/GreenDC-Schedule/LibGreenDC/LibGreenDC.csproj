@@ -53,6 +53,7 @@
     <Compile Include="Scheduler\FirstFitScheduler.cs" />
     <Compile Include="Scheduler\IScheduler.cs" />
     <Compile Include="Scheduler\SchedulerBase.cs" />
+    <Compile Include="Scheduler\SchedulerFactory.cs" />
     <Compile Include="Scheduler\SchedulerType.cs" />
     <Compile Include="Util\Timer.cs" />
   </ItemGroup>

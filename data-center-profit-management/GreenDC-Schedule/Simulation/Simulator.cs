@@ -77,7 +77,9 @@ namespace Simulation
 
         public override string ToString()
         {
-            return string.Format("{0} SProf = {1} UsedGreen = {2} UsedBrown = {3} UsedBrownCost = {4} ScheJobNum = {5}", SchedulerType, ScheduledProfit, UsedGreenEnergy, UsedBrownEnergyAmount, UsedBrownEnergyCost, ScheduledJobs.Count);
+            //return string.Format("{0} SProf = {1} UsedGreen = {2} UsedBrown = {3} UsedBrownCost = {4} ScheJobNum = {5}", SchedulerType, ScheduledProfit, UsedGreenEnergy, UsedBrownEnergyAmount, UsedBrownEnergyCost, ScheduledJobs.Count);
+
+            return string.Format("{0} {1} {2} {3} {4} {5}", SchedulerType, ScheduledProfit, UsedGreenEnergy, UsedBrownEnergyAmount, UsedBrownEnergyCost, ScheduledJobs.Count);
         }
     }
 
