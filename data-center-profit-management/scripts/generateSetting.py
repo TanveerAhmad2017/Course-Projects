@@ -1,7 +1,8 @@
 import sys
 import random
+from math import *
 
-def generateSetting(jobnum=0, times = 48, vmnum = 4, offpeak = 2, onpeak =4, revenuerate = 10, jobavglen =4, arrivalrate = 0.5):
+def generateSetting(jobnum=0, times = 48, vmnum = 4, offpeak = 7, onpeak =10, revenuerate = 10, jobavglen =4, arrivalrate = 0.5):
 	# # settings
 	# jobnum = 0
 	# times = 48
@@ -38,10 +39,12 @@ def generateSetting(jobnum=0, times = 48, vmnum = 4, offpeak = 2, onpeak =4, rev
 		curr = (int)(random.expovariate(arrivalrate) + curr)
 		if curr > times:
 			break
-		deadline = random.randint(curr, times);
-		process = random.randint(1, min(jobavglen*2,deadline-curr+1))
+		# arrivalTime = curr
+		arrivalTime = random.randint(1,times)
+		deadline = random.randint(arrivalTime, times);
+		process = random.randint(1, min(jobavglen*2,deadline-arrivalTime+1))
 		vm = 1
-		f.write('%d %d %d %d\n' %(curr, deadline, process, vm))
+		f.write('%d %d %d %d\n' %(arrivalTime, deadline, process, vm))
 		jobnum = jobnum+1
 	f.close()
 
@@ -57,17 +60,25 @@ def generateSetting(jobnum=0, times = 48, vmnum = 4, offpeak = 2, onpeak =4, rev
 	f.close()
 
 
+	#read real solar traces from file
+
+
+
 	#output solar energy
 	f = open('../data/solars.txt', 'w')
 
 	f.write('%s%d%s' %('green1..green', times, '~\n'))
-	green = [0]*times
-	#day 1 daytime
-	for x in range((int)(times*6/48), (int)(times*17/48)):
-		green[x] = random.randint(1, vmnum)
-	#day 1 nighttime
-	for x in range((int)(times*30/48), (int)(times*41/48)):
-		green[x] = random.randint(1, vmnum)
+
+	green = readSolarTraceFromFile(times, vmnum)
+
+	#generate solar traces
+	# green = [0]*times
+	# #day 1 daytime
+	# for x in range((int)(times*6/48), (int)(times*17/48)):
+	# 	green[x] = random.randint(1, vmnum)
+	# #day 1 nighttime
+	# for x in range((int)(times*30/48), (int)(times*41/48)):
+	# 	green[x] = random.randint(1, vmnum)
 	for i in range(len(green)):
 		f.write('%d ' %green[i])
 	f.write('\n')
@@ -92,6 +103,36 @@ def generateSetting(jobnum=0, times = 48, vmnum = 4, offpeak = 2, onpeak =4, rev
 
 	# print 'jobnum = ', jobnum, 'times = ', times, "vmnum = ", vmnum, "arrivalrate = ", arrivalrate
 	# sys.stdout.write("jobnum {:>2} times {:>2} vmnum {:>2} arrivalrate {:>2}\n".format(jobnum, times, vmnum,arrivalrate))
+
+
+def readSolarTraceFromFile(times, vmnum):
+	solar = []
+	f = open('./realSolars.txt', 'r')
+	lines=f.readlines()
+	interval = 196/times	
+	scale = 16/vmnum
+	for line in lines:
+		items = line.split(' ')
+		solar.append((int)(line[0]))
+
+	times = (int)(times)
+	vmnum = (int)(vmnum)
+	interval = 196/times
+	maxVal = max(solar)
+	# print maxVal
+	scale = (float)(16)/vmnum*maxVal/16;
+
+	# print scale
+	rnt = []
+	for i in range(196-interval):
+		if i%interval == 0:
+			rescaleValue = ceil((float)(solar[i])/scale)
+			rnt.append(rescaleValue)
+	
+	return rnt
+
+
+
 
 if __name__ == "__main__":
 	generateSetting()
