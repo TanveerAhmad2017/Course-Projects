@@ -2,7 +2,7 @@
 
 Solar_High = load('.\data\realSolars.txt');
 
-maxNum = max(Solar_High);
+maxNum = max(Solar_High(1:196,1));
 for i=1:1:size(Solar_High,2)
     if maxNum < Solar_High(1,i)
         maxNum = Solar_High(1,i)
@@ -36,9 +36,9 @@ set(axes1,'FontSize',30,'FontWeight','bold');
 % set(p,'Color','g','LineWidth',3,'linestyle','-')
 % set(p,'Marker','^','Markersize',12);
 
-p = area(Solar_High(1:196,1)/maxNum*100 *solar_loadFactor,'FaceColor','g');
+p = area(Solar_High(1:196,1)*1.0/maxNum*100 *solar_loadFactor,'FaceColor','g');
 
- 
+
    
 %change x-axis scale 
 axis([1 196 0 100])
@@ -47,8 +47,8 @@ set(axes1,'XGrid','on','YGrid','off');
 leg = legend(axes1,'show');
 set(leg,'FontSize',30);
  
-set(axes1,'YTick', [20,40,60,80,100], 'YTickLabel',{ 20,40,60,80,100},'XGrid','off','YGrid','off');
-
+%  set(axes1,'YTick', [4,  8, 12, 16], 'YTickLabel',{4,8,12,16},'XGrid','off','YGrid','off');
+set(axes1,'YTick', [20,  40, 60,80,100], 'YTickLabel',{20,  40, 60,80,100},'XGrid','off','YGrid','off');
 
 
  set(axes1,'XTick',[1:48:196],'XTickLabel',{'day-1 00:00','day-1 12:00','day-2 00:00','day-2 12:00','day-3 00:00'},'XGrid','on');
@@ -66,7 +66,11 @@ set(gcf, 'PaperPosition', [0 0 13 7]); %Position plot at left hand corner with w
 set(gcf, 'PaperSize', [13 7]); %Set the paper to have width 5 and height 5.
 %saveas(gcf, 'SolarTrace_High', 'pdf') %Save figure
 saveas(gcf, '.\figures\SolarTrace_High', 'pdf') %Save figure  
-saveas(gca, strcat('.\figures\SolarTrace_High', '.eps'),'psc2') %Save figure 
+saveas(gca, strcat('.\figures\SolarTrace_High', '.eps'),'psc2') %Save figure
+
+% dropboxPath = 
+saveas(gcf, 'C:\Users\hwang14\Dropbox\Meerkats\greenSlot\greenSlot-CS773\Figures\SolarTrace_High', 'pdf') %Save figure  
+saveas(gca, strcat('C:\Users\hwang14\Dropbox\Meerkats\greenSlot\greenSlot-CS773\Figures\SolarTrace_High', '.eps'),'psc2') %Save figure 
     
     
  

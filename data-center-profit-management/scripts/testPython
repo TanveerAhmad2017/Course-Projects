@@ -1,0 +1,35 @@
+
+from math import *
+
+def readSolarTraceFromFile(times, vmnum):
+	solar = []
+	f = open('./realSolars.txt', 'r')
+	lines=f.readlines()
+	interval = 192/times	
+	scale = 16/vmnum
+	for line in lines:
+		items = line.split(' ')
+		solar.append((int)(line[0]))
+		if(len(solar) > 192):
+			break;
+
+	times = (int)(times)
+	vmnum = (int)(vmnum)
+	interval = 192/times
+	maxVal = max(solar)
+	# solar maxVal
+	scale = (float)(16)/vmnum*maxVal/16;
+
+	# print scale
+	rnt = []
+	for i in range(192):
+		if i%interval == 0:
+			rescaleValue = ceil((float)(solar[i])/scale)
+			rnt.append(rescaleValue)
+	
+	return rnt
+
+if __name__ == "__main__":
+	a = readSolarTraceFromFile(192,100)
+	print a
+	print len(a)

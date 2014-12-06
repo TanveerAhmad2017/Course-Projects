@@ -2,7 +2,7 @@ import sys
 import random
 from math import *
 
-def generateSetting(jobnum=0, times = 48, vmnum = 4, offpeak = 7, onpeak =10, revenuerate = 10, jobavglen =4, arrivalrate = 0.5):
+def generateSetting(jobnum=0, times = 192, vmnum = 100, offpeak = 2, onpeak =8, revenuerate = 10, jobavglen =10, arrivalrate = 0.5):
 	# # settings
 	# jobnum = 0
 	# times = 48
@@ -37,10 +37,10 @@ def generateSetting(jobnum=0, times = 48, vmnum = 4, offpeak = 7, onpeak =10, re
 	while curr < times:	
 		#arrive, deadline, process, VM, value
 		curr = (int)(random.expovariate(arrivalrate) + curr)
-		if curr > times:
+		if curr >= times:
 			break
-		# arrivalTime = curr
-		arrivalTime = random.randint(1,times)
+		arrivalTime = curr
+		# arrivalTime = random.randint(1,times)
 		deadline = random.randint(arrivalTime, times);
 		process = random.randint(1, min(jobavglen*2,deadline-arrivalTime+1))
 		vm = 1
@@ -109,24 +109,26 @@ def readSolarTraceFromFile(times, vmnum):
 	solar = []
 	f = open('./realSolars.txt', 'r')
 	lines=f.readlines()
-	interval = 196/times	
+	interval = 192/times	
 	scale = 16/vmnum
 	for line in lines:
 		items = line.split(' ')
 		solar.append((int)(line[0]))
+		if(len(solar) > 192):
+			break;
 
 	times = (int)(times)
 	vmnum = (int)(vmnum)
-	interval = 196/times
+	interval = 192/times
 	maxVal = max(solar)
-	# print maxVal
+	# solar maxVal
 	scale = (float)(16)/vmnum*maxVal/16;
 
 	# print scale
 	rnt = []
-	for i in range(196-interval):
+	for i in range(192):
 		if i%interval == 0:
-			rescaleValue = ceil((float)(solar[i])/scale)
+			rescaleValue = ceil((float)(solar[i])/scale/2)
 			rnt.append(rescaleValue)
 	
 	return rnt

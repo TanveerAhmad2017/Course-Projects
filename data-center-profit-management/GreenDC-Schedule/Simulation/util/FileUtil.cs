@@ -41,8 +41,8 @@ namespace Simulation.util
 
             // init ps 
             jobs = ReadJobFromFile(path + "jobs.txt", ps.RevenueRate);
-           // Console.WriteLine("jobs");
-           // jobs.ForEach(j => Console.WriteLine(j.ArrivalTime + " " + j.Deadline + " " + j.ProcessingTime + " " + j.RequiredNodes));
+           // Console.WriteLine("scheduledJobs");
+           // scheduledJobs.ForEach(j => Console.WriteLine(j.ArrivalTime + " " + j.Deadline + " " + j.ProcessingTime + " " + j.RequiredNodes));
         }
 
         public static String ReadSingleParameterFromFile(String path)

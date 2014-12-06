@@ -31,4 +31,5 @@ if __name__ == "__main__":
 	#arrival rate change from 0.1 to 1.5, which corresponds to workload utilization change from 20% to 200%
 	for i in range(1, 16):
 		print i
-		runSim(rep = 10, arrivalrate = i*0.05)
+		arrivalrate = 0.2
+		runSim(rep = 30, arrivalrate = i*arrivalrate)
