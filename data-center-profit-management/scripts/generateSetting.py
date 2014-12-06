@@ -2,7 +2,7 @@ import sys
 import random
 from math import *
 
-def generateSetting(jobnum=0, times = 192, vmnum = 100, offpeak = 2, onpeak =8, revenuerate = 10, jobavglen =10, arrivalrate = 0.5):
+def generateSetting(jobnum=0, times = 192, vmnum = 100, offpeak = 6, onpeak =8, revenuerate = 10, jobavglen =10, arrivalrate = 0.5):
 	# # settings
 	# jobnum = 0
 	# times = 48
@@ -128,7 +128,7 @@ def readSolarTraceFromFile(times, vmnum):
 	rnt = []
 	for i in range(192):
 		if i%interval == 0:
-			rescaleValue = ceil((float)(solar[i])/scale/2)
+			rescaleValue = ceil((float)(solar[i])/scale)
 			rnt.append(rescaleValue)
 	
 	return rnt

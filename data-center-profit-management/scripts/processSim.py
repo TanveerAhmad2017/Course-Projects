@@ -5,14 +5,14 @@ def processSim(arrivalrate = 0.1):
 	schedule = ['firstfit', 'bestfit']
 	metrix = ['SchedulerType', 'ScheduledProfit', 'UsedGreenEnergy', 'UsedBrownEnergyAmount', 
 	'UsedBrownEnergyCost', 'ScheduledJobs.Count', 'ScheduledWorkloadUtilization',
-	'ArrivedWorkloadUtilization']
+	'ArrivedWorkloadUtilization','AvgUnitBrownCost']
 	# 2: ScheduledProfit
 	# 7: ScheduledWorkloadUtilization
 	# 3: UsedGreenEnergy
 	# 4: UsedBrownEnergyAmount
 	# 5: UsedBrownEnergyCost
 
-	for fm in range(2,9):
+	for fm in range(2,10):
 		fieldNum = fm
 		for schedulerName in schedule:
 			average = []

@@ -78,12 +78,14 @@ namespace Simulation
         public List<Job> ScheduledJobs { get; set; }
         public double ScheduledWorkloadUtilization { get; set; }
         public double ArrivedWorkloadUtilization { get; set; }
+        public double AvgUnitBrownCost { get { return UsedBrownEnergyAmount == 0 ? 0 : (double)UsedBrownEnergyCost / UsedBrownEnergyAmount; } }
 
         public override string ToString()
         {
             //return string.Format("{0} SProf = {1} UsedGreen = {2} UsedBrown = {3} UsedBrownCost = {4} ScheJobNum = {5}", SchedulerType, ScheduledProfit, UsedGreenEnergy, UsedBrownEnergyAmount, UsedBrownEnergyCost, ScheduledJobs.Count);
 
-            return string.Format("{0} {1} {2} {3} {4} {5} {6} {7}", SchedulerType, ScheduledProfit, UsedGreenEnergy, UsedBrownEnergyAmount, UsedBrownEnergyCost, ScheduledJobs.Count, ScheduledWorkloadUtilization, ArrivedWorkloadUtilization);
+            return string.Format("{0} {1} {2} {3} {4} {5} {6} {7} {8}", SchedulerType, ScheduledProfit, UsedGreenEnergy,
+                UsedBrownEnergyAmount, UsedBrownEnergyCost, ScheduledJobs.Count, ScheduledWorkloadUtilization, ArrivedWorkloadUtilization, AvgUnitBrownCost);
         }
     }
 

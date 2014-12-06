@@ -1,8 +1,8 @@
 function plotFFBF(metrixType, arrivalrate, setting)
     %Build Figure
     
-    metrixString = {'SchedulerType'   'ScheduledProfit'  'UsedGreenEnergy'  'UsedBrownEnergyAmount'  'UsedBrownEnergyCost'   'ScheduledJobs.Count' 'ScheduledWorkloadUtilization' 'ArrivedWorkloadUtilization'}
-    yAxisName = {'SchedulerType'   'Scheduled Profit'  'Used GreenEnergy'  'Used BrownEnergy Amount'  'Used BrownEnergy Cost'   'Scheduled Job Num' 'Scheduled WorkloadUtilization' 'ArrivedWorkloadUtilization'}
+    metrixString = {'SchedulerType'   'ScheduledProfit'  'UsedGreenEnergy'  'UsedBrownEnergyAmount'  'UsedBrownEnergyCost'   'ScheduledJobs.Count' 'ScheduledWorkloadUtilization' 'ArrivedWorkloadUtilization', 'AvgUnitBrownCost'}
+    yAxisName = {'SchedulerType'   'Scheduled Profit'  'Used GreenEnergy'  'Used BrownEnergy Amount'  'Used BrownEnergy Cost'   'Scheduled Job Num' 'Scheduled WorkloadUtilization' 'ArrivedWorkloadUtilization', 'AvgUnitBrownCost'}
     
 
     metrix = cellstr(metrixString)
@@ -52,12 +52,14 @@ function plotFFBF(metrixType, arrivalrate, setting)
 %            upper = 2000
 %     end
     switch metrixType
-        case 7 
-            upper = 1;
-        case 8
-            upper = ceil( upper/1);
+    case 7 
+        upper = 1;
+    case 8
+        upper = ceil( upper/1);
+    case 9
+        upper = ceil( upper/1);
         otherwise
-            upper = ceil(upper/100)*100;        
+        upper = ceil(upper/100)*100;        
     end
             
     axis([1 15.1 0 upper])  
@@ -91,7 +93,7 @@ function plotFFBF(metrixType, arrivalrate, setting)
     set(gcf, 'PaperPosition', [0 0 13 7]); %Position plot at left hand corner with width 5 and height 5.
     set(gcf, 'PaperSize', [13 7]); %Set the paper to have width 5 and height 5.
     %saveas(gcf, 'SolarTrace_High', 'pdf') %Save figure
-    filename = strcat('.\figures\FFBF_', metrixString{metrixType})
+    filename = strcat('.\figures\FFBF_', metrixString{metrixType},setting)
     saveas(gcf, filename, 'pdf') %Save figure  
     saveas(gca, strcat(filename, '.eps'),'psc2') %Save figure 
     
