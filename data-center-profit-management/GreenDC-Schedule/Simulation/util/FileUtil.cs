@@ -12,6 +12,7 @@ namespace Simulation.util
         {
             // init ps            
 
+            //note that for brownEnergyPrice/greenEnergy list, the time index start from 1, thus need to append 0 in the head of list
 
             var timeslotString = ReadSingleParameterFromFile(path + "totaltimeslots.txt");
             ps.TimeSlots = Int16.Parse(timeslotString); // read from file
@@ -56,6 +57,7 @@ namespace Simulation.util
             string[] lines = System.IO.File.ReadAllLines(path);
             string[] items = lines[1].Split(' ');
             List<int> rntlist = new List<int>();
+            rntlist.Add(0);
             foreach (string item in items)
             {
                 if (!item.Equals(""))
@@ -69,6 +71,7 @@ namespace Simulation.util
             string[] lines = System.IO.File.ReadAllLines(path);
             string[] items = lines[1].Split(' ');
             List<double> rntList = new List<double>();
+            rntList.Add(0.0);
             foreach (string item in items)
             {
                 if (!item.Equals(""))

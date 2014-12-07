@@ -2,7 +2,7 @@ import sys
 import random
 from math import *
 
-def generateSetting(jobnum=0, times = 192, vmnum = 100, offpeak = 2, onpeak =4, revenuerate = 10, jobavglen =10, arrivalrate = 0.5):
+def generateSetting(jobnum=0, times = 48, vmnum = 16, offpeak = 8, onpeak =6, revenuerate = 10, jobavglen =10, arrivalrate = 0.2):
 	# # settings
 	# jobnum = 0
 	# times = 48
@@ -30,6 +30,7 @@ def generateSetting(jobnum=0, times = 192, vmnum = 100, offpeak = 2, onpeak =4, 
 	f.write("%d" %times)
 	f.close()
 
+	workload = 0
 
 	#output jobs
 	f = open('../data/jobs.txt','w')
@@ -46,8 +47,13 @@ def generateSetting(jobnum=0, times = 192, vmnum = 100, offpeak = 2, onpeak =4, 
 		vm = 1
 		f.write('%d %d %d %d\n' %(arrivalTime, deadline, process, vm))
 		jobnum = jobnum+1
+		workload = workload + process
 	f.close()
 
+	f = open("../data/workUtilization.txt", 'w')
+	workUtilization = (float)(workload)/vmnum/times
+	f.write('%f' %workUtilization)
+	f.close()
 	#print jobnum
 
 	f = open('../data/jobnum.txt','w')
@@ -137,5 +143,5 @@ def readSolarTraceFromFile(times, vmnum):
 
 
 if __name__ == "__main__":
-	generateSetting()
+	generateSetting(arrivalrate = 0.2)
 
