@@ -58,7 +58,7 @@ namespace CallLingo
 
 
             //add license
-            Lingo.LScreateEnvLicenseLng("key", ref nError);
+            Lingo.LScreateEnvLicenseLng("lndlng12.lic", ref nError);
         }
 
   
