@@ -2,78 +2,126 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Diagnostics;
 using System.IO;
-using System.Threading;
 
 namespace CallLingo
 {
     class Program
     {
-        static void Main(string[] args)
+        private static int pLingoEnv;
+        private static int nError;
+        private static int nPointersNow;
+        private static double dSatus;
+        private static double dObjective;
+
+
+        private static void CheckError(int errorNum)
         {
+            if (errorNum != Lingo.LSERR_NO_ERROR_LNG)
+            {
+                Console.WriteLine("Lingo error: " + errorNum);
+                System.Environment.Exit(-1);
+            }
         }
 
-
-        private double FindSolution(String path)
+        private static void InitLingo()
         {
-
-            var process = new Process
+            //create lingo environement
+            pLingoEnv = Lingo.LScreateEnvLng();
+            if (pLingoEnv == 0)
             {
-                StartInfo =
-                {
-                    FileName = dir + @"bin\lingoDll\simple.exe",
-                    Arguments = "greenSLA.lng setting.txt",
-                    UseShellExecute = true,
-                    WorkingDirectory = path,
-                    WindowStyle = ProcessWindowStyle.Hidden
-                    //RedirectStandardOutput = true
-                }
-            };
+                Console.WriteLine("Unable to create Lingo environment.\n");
+                return;
+            }
 
-            //这里相当于传参数             
-            process.Start();
+            //create and open lingo log
+            int nError = Lingo.LSopenLogFileLng(pLingoEnv, "Lingo.log");
+            CheckError(nError);
 
-            //测试同步执行 
-            process.WaitForExit();
+            dSatus = -1.0;
+            nPointersNow = -1;
 
-            var maxTime = DateTime.Now.AddMinutes(5);
+            // Let Lingo know we have a callback function
+            var cbd = new CallbackData();
+            var cb = new Lingo.typCallback(LngCallback.MyCallback);
 
-            var finished = false;
+            nError = Lingo.LSsetCallbackSolverLng(pLingoEnv, cb, cbd);
+            CheckError(nError);
 
-            while (!finished)
+            //// Pointer to the solution dSatus code
+            //nError = Lingo.LSsetPointerLng(pLingoEnv, ref dSatus, ref nPointersNow);
+            //CheckError(nError);
+
+            //// Point to dObjective, where Lingo will return the objective value
+            //nError = Lingo.LSsetPointerLng(pLingoEnv, ref dObjective, ref nPointersNow);
+            //CheckError(nError);
+        }
+
+  
+
+        public static void CleanUp(){
+        
+            //close log file
+            Lingo.LScloseLogFileLng(pLingoEnv);
+
+            //delete environment log
+            Lingo.LSdeleteEnvLng(pLingoEnv);
+
+            Console.WriteLine("byebye Zhonghua!");
+        
+        }
+
+        public static void ExecuteScript(String filename, String settingsFileName)
+        {
+            unsafe
             {
-                Console.WriteLine(" - Waiting for report...");
 
-                using (var sr = new StreamReader(path + "lingo.log"))
+                var text = new StringBuilder("set echoin 1 \n");
+
+                if (settingsFileName != null)
                 {
-                    while (!sr.EndOfStream)
+                    using (StreamReader streamReader = new StreamReader(settingsFileName))
                     {
-                        var line = sr.ReadLine();
-
-                        if (line.Contains("Building solution report"))
-                        {
-                            finished = true;
-                            break;
-                        }
+                        text.Append("\n" + streamReader.ReadToEnd() + "\n");
                     }
                 }
 
-                if (finished) break;
+                text.Append(" take " + filename + " \n go \n quit \n");
 
-                Thread.Sleep(5 * 1000);
+                Console.WriteLine("Running lingo with commands: \n {0}", text);
+                nError = Lingo.LSexecuteScriptLng(pLingoEnv, text.ToString());
+                Lingo.LScloseLogFileLng(pLingoEnv);
 
-                if (DateTime.Now > maxTime) break;
+                //// dSatus != (double)Lingo.LS_STATUS_GLOBAL_LNG
+                //if (nError != 0)
+                //{
+                //    Console.WriteLine("Unable to solve!");
+                //    CheckError(nError);
+                //}
+                //else
+                //{
+                //    Console.WriteLine("Profit: {0} \n", dObjective);
+                //}
             }
 
-            return getProfit(path);
         }
 
-        //read profit from file
-        public double getProfit(String path) {
 
-            String[] lines = System.IO.File.ReadAllLines(path);
-            return double.Parse(lines[0]);
+        [STAThread]
+        private static void Main(string[] args)
+        {
+            if (args.Length <= 1)
+            {
+                Console.WriteLine("Usage: CallLingo.exe script [settings]");
+            }
+
+            InitLingo();
+
+            ExecuteScript(args[0], args.Length > 1 ? args[1] : null);
+
+            CleanUp();
+
+
         }
     }
 }
