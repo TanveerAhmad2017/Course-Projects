@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using System.IO;
+using System.Threading;
 
 namespace CallLingo
 {
@@ -13,14 +15,14 @@ namespace CallLingo
         }
 
 
-        private double FindSolution()
+        private double FindSolution(String path)
         {
 
             var process = new Process
             {
                 StartInfo =
                 {
-                    FileName = dir + @"bin\simple.exe",
+                    FileName = dir + @"bin\lingoDll\simple.exe",
                     Arguments = "greenSLA.lng setting.txt",
                     UseShellExecute = true,
                     WorkingDirectory = path,
@@ -64,7 +66,14 @@ namespace CallLingo
                 if (DateTime.Now > maxTime) break;
             }
 
-            return getProfit();
+            return getProfit(path);
+        }
+
+        //read profit from file
+        public double getProfit(String path) {
+
+            String[] lines = System.IO.File.ReadAllLines(path);
+            return double.Parse(lines[0]);
         }
     }
 }
