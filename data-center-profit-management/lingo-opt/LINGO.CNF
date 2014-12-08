@@ -1,3 +1,4 @@
 ! LINGO Custom Configuration Data:
 MXMEMB=  3999
 ECHOIN=  1
+GLOBAL=  1

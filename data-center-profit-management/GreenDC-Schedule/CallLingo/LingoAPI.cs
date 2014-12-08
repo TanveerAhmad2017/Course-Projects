@@ -40,40 +40,42 @@ public class Lingo
     public static int LS_STATUS_CUTOFF_LNG = 8;
     public static int LS_STATUS_NUMERIC_ERROR_LNG = 9;
 
-    [DllImport("lingd11.dll", EntryPoint = "LSclearPointersLng")]
+    [DllImport("lingd12.dll", EntryPoint = "LSclearPointersLng")]
     public static extern int LSclearPointersLng(int pLingoEnv);
 
-    [DllImport("lingd11.dll", EntryPoint = "LScloseLogFileLng")]
+    [DllImport("lingd12.dll", EntryPoint = "LScloseLogFileLng")]
     public static extern int LScloseLogFileLng(int pLingoEnv);
 
-    [DllImport("lingd11.dll", EntryPoint = "LScreateEnvLng")]
+    [DllImport("lingd12.dll", EntryPoint = "LScreateEnvLng")]
     public static extern int LScreateEnvLng();
 
-    [DllImport("lingd11.dll", EntryPoint = "LSdeleteEnvLng")]
+    [DllImport("lingd12.dll", EntryPoint = "LSdeleteEnvLng")]
     public static extern int LSdeleteEnvLng(int pLingoEnv);
 
-    [DllImport("lingd11.dll", EntryPoint = "LSexecuteScriptLng")]
+    [DllImport("lingd12.dll", EntryPoint = "LSexecuteScriptLng")]
     public static extern int LSexecuteScriptLng(int pLingoEnv,
        string pcScript);
 
-    [DllImport("lingd11.dll", EntryPoint = "LSgetCallbackInfoLng")]
+    [DllImport("lingd12.dll", EntryPoint = "LSgetCallbackInfoLng")]
     public static extern int LSgetCallbackInfoLng(int pLingoEnv,
        int nObject, ref int pnResult);
 
-    [DllImport("lingd11.dll", EntryPoint = "LSopenLogFileLng")]
+    [DllImport("lingd12.dll", EntryPoint = "LSopenLogFileLng")]
     public static extern int LSopenLogFileLng(int pLingoEnv,
        string pcLogFile);
 
-    [DllImport("lingd11.dll", EntryPoint = "LSsetCallbackSolverLng")]
+    [DllImport("lingd12.dll", EntryPoint = "LSsetCallbackSolverLng")]
     public static extern int LSsetCallbackSolverLng(int pLingoEnv,
        Lingo.typCallback pSolverCallbackFunction,
           [MarshalAs(UnmanagedType.AsAny)] object pMyData);
 
-    [DllImport("lingd11.dll", EntryPoint = "LSsetPointerLng")]
+    [DllImport("lingd12.dll", EntryPoint = "LSsetPointerLng")]
     public static extern int LSsetPointerLng(int pLingoEnv,
        ref double pdPointer, ref int pnPointersNow);
 
-        
+    //add licence
+    [DllImport("lingd12.dll", EntryPoint = "LScreateEnvLicenseLng")]
+    public static extern IntPtr LScreateEnvLicenseLng(string pcLicenseKey, ref int pnError);    
 
    
 

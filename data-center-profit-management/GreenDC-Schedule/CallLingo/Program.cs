@@ -55,6 +55,10 @@ namespace CallLingo
             //// Point to dObjective, where Lingo will return the objective value
             //nError = Lingo.LSsetPointerLng(pLingoEnv, ref dObjective, ref nPointersNow);
             //CheckError(nError);
+
+
+            //add license
+            Lingo.LScreateEnvLicenseLng("key", ref nError);
         }
 
   
@@ -90,7 +94,7 @@ namespace CallLingo
 
                 Console.WriteLine("Running lingo with commands: \n {0}", text);
                 nError = Lingo.LSexecuteScriptLng(pLingoEnv, text.ToString());
-                Lingo.LScloseLogFileLng(pLingoEnv);
+                //Lingo.LScloseLogFileLng(pLingoEnv);
 
                 //// dSatus != (double)Lingo.LS_STATUS_GLOBAL_LNG
                 //if (nError != 0)
@@ -119,7 +123,7 @@ namespace CallLingo
 
             ExecuteScript(args[0], args.Length > 1 ? args[1] : null);
 
-            CleanUp();
+           // CleanUp();
 
 
         }

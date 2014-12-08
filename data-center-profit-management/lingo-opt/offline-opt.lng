@@ -1,0 +1,117 @@
+model:
+
+!notations;
+sets:
+	jobs/@file('jobnum.txt')/:arrive, deadline, process, VM; 
+	times/@file('times.txt')/;
+	greenEnergy/@file('solars.txt')/:green;
+	brownPrice/@file('brownPrice.txt')/:brown;
+	linkStartTime(jobs):StartTime; !start time of job;
+	linkFinishTime(jobs):FinishTime; !finish time of job;
+	linkEnergyPerSlot(times):energyPerSlot; !energy consumption at each slot;
+	linkEnergyCostPerSlot(times):energyCostPerSlot; !energy cost at teach time slot;
+	linkUsedGreenPerSlot(times): usedGreenPerSlot; !total green energy ysed;
+	linkSchedule(jobs): isScheduled; !whether a job is scheduled;
+	linkJobEnergyConsumption(jobs, times): jobEnergyDemand; !energy demand of job j at time t;
+endsets
+
+
+!objective: maximize profit;
+max =  @sum(jobs(J): isScheduled(J)*process(J)*RevenueFix ) - @sum(times(T):energyCostPerSlot(T));
+
+
+
+
+
+!constraints: isScheduled(J) is either 0 or 1;
+@for(jobs(J):
+	@bin(isScheduled(J)));	
+
+
+!inner constraints: jobEnergyCost is nonnegative integer;
+@for(jobs(J):
+	@for(times(T):
+		@gin(jobEnergyDemand(J,T))));
+
+
+!inner constraints: jobEnergyDemand by time slot;
+@for(jobs(J):
+	@for(times(T):
+		jobEnergyDemand(J,T) >= isScheduled(J)* @if(StartTime(J) #le# T,1,0) * @if(FinishTime(J) #ge# T, 1, 0) ));
+
+
+!inner constraints: energy demand per slot;
+@for(times(T):
+	energyPerSlot(T) =
+		@sum(jobs(J) : jobEnergyDemand(J,T)));
+
+!data center constraints: computing capacity should not exceed the data center capability;
+@for(times(T):
+	energyPerSlot(T) <= NodeNum+EP);
+
+
+! inner constraints: energy cost per slot;
+!rewrite;
+@for(times(T):
+	energyCostPerSlot(T) >= (energyPerSlot(T) - green(T))*brown(T));
+! inner constraints: energy cost per slot should be larger than 0;
+@for(times(T):
+	energyCostPerSlot(T) >= 0);
+
+!@for(times(T):
+	energyCostPerSlot(T) = @if( (energyPerSlot(T) - green(T)) #ge#0, (energyPerSlot(T) - green(T)), 0)*brown(T));
+
+
+
+! inner constraints: start time be integer;
+@for(jobs(J):
+	@gin(StartTime(J)));
+
+!arrival time constraints;
+@for(jobs(J):
+	StartTime(J) >= arrive(J));
+
+!inner constraints: deadline definition;
+@for(jobs(J):
+	FinishTime(J) = StartTime(J)+process(J)-1);
+
+!inner constraints: finish time is integer; 
+!comment to test;
+@for(jobs(J):
+	@gin(FinishTime(J)));
+
+!deadline constraints;
+@for(jobs(J):
+      FinishTime(J)  <= deadline(J) + EP) ;
+
+
+
+!output green energy;
+!@for(times(T):
+	usedGreenPerSlot(T) = @if(energyPerSlot(T) #ge# green(T),green(T),energyPerSlot(T)));
+
+usedGreenEnergy = @sum(times(T):usedGreenPerSlot(T));
+
+scheduledJobNum = @sum(jobs(J): isScheduled(J));
+
+profit = @sum(jobs(J): isScheduled(J)*process(J)*RevenueFix ) - @sum(times(T):energyCostPerSlot(T));
+
+
+!!settings;
+data:
+EP = 0.001;
+arrive, deadline, process, VM= @file('jobs.txt');
+green = @file('solars.txt');
+brown = @file('brownPrice.txt');
+RevenueFix = @file('revenuerate.txt');
+NodeNum = @file('vm.txt');
+
+
+!@text('Profit.txt') = profit;
+@text('UsedGreenEnergy.txt') = usedGreenEnergy ;
+@text('ScheduledJobNum.txt') = scheduledJobNum ;
+@text('profit.txt') = profit;
+
+enddata
+
+end
