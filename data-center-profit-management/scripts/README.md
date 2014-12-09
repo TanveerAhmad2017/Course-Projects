@@ -8,6 +8,7 @@
 |[pystats.py](./pystats.py)|  [Python statistic Tool](https://github.com/xizhonghua/pystats),process repetition results to get mean, variances, confidential interval etc|
 |[processSim.py](./processSim.py)| process simulation result produced by [runSim.py](./runSim.py)|
 |[copyFileSettingToLingo.bat](./copyFileSettingToLingo.bat)| copy settings from ./data folder to lingo-opt folder, since Lingo requires the setting files to in the execution directory|
+|[oneOPTSimulation.py](./oneOPTSimulation.py)| Simulations to compare OPT, FirstFit and BestFit| 
 
 ### Input Date
 |File| Contents|
