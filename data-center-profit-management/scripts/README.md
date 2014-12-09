@@ -9,6 +9,12 @@
 |[processSim.py](./processSim.py)| process simulation result produced by [runSim.py](./runSim.py)|
 |[copyFileSettingToLingo.bat](./copyFileSettingToLingo.bat)| copy settings from ./data folder to lingo-opt folder, since Lingo requires the setting files to in the execution directory|
 
+### Input Date
+|File| Contents|
+|:----|:-------|
+|[realSolars.txt](./realSolars.txt)| Real solar trace from UMass Weather Station, acts as solar traces input of [generate-setting.py](./generate-setting.py)|
+
+
 ### Generate Simulation Input
 
 
