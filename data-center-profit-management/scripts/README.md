@@ -30,13 +30,10 @@ python processSim.py
 |[copyFileSettingToLingo.bat](./copyFileSettingToLingo.bat)| copy settings from `./data` folder to lingo-opt folder, since Lingo requires the setting files to in the execution directory, this script will be called by [oneOPTSimulation.py](./oneOPTSimulation.py)|
 - How to run
 For each repeatition
-```
-python oneOPTSimulation.py
-```
-Run LINGO
-```
-python processAvgOPT.py
-```
+  - step 1: `python oneOPTSimulation.py`
+  - step 2: Run LINGO
+  - step 3: `python processAvgOPT.py`
+- Note: Since the LINGO we use is in free trail, the LINGO API we get has constraints on the size model, which prohibit our model from executing. Thus, we has to use manually execution. Those who want to run large scale simulations are suggested to buy a higher version of LINGO.
 
 ### Input Date
 |File| Contents|
