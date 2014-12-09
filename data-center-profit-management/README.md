@@ -6,7 +6,8 @@
 ### Objective
 - Design and implement offline algorithm to management profit in data center
 
-### TODO
-- [X] python script to generate input settings
-- [X] implement heuristic approach: First-Fit and Best-Fit (online algorithm), EDFFF(offline algorithm) and EDF-BF(offline algorithm)
-- [X] matlab plot figure
+### Overview of this project
+- We implement the offline optimal algorithm using LINGO solver
+- We implement two heuristic algorithms FirstFit and BestFit
+- We evaluat the running time of optimal offline algorithm (OPT) under different settings
+- We evaluate the performance of heuristic algorithms FirstFit and BestFit against OPT
