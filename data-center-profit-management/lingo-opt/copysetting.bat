@@ -1,1 +1,0 @@
-robocopy ..\data .\ *.txt /XO
