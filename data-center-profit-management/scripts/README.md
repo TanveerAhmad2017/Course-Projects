@@ -9,7 +9,7 @@
 |[processSim.py](./processSim.py)| process simulation result produced by [runSim.py](./runSim.py)|
 |[copyFileSettingToLingo.bat](./copyFileSettingToLingo.bat)| copy settings from ./data folder to lingo-opt folder, since Lingo requires the setting files to in the execution directory|
 |[oneOPTSimulation.py](./oneOPTSimulation.py)| Simulations to compare OPT, FirstFit and BestFit| 
-|[processAvgOPT.py](./processAvgOPT.py)| Process the result of  to get the average profit of OPT, FirstFit and BestFit|
+|[processAvgOPT.py](./processAvgOPT.py)| Process the result of [oneOPTSimulation.py](./oneOPTSimulation.py) to get the average profit of OPT, FirstFit and BestFit|
 
 ### Input Date
 |File| Contents|
