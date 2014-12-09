@@ -3,7 +3,7 @@
 ### Shared Tool Functions
 |File| Contents|
 |:----|:-------|
-|[generate-setting.py](./generate-setting.py)| generate problem setting to folder [data](../data), act as input for simulation|
+|[generate-setting.py](./generateSetting.py)| generate problem setting to folder [data](../data), act as input for simulation|
 |[pystats.py](./pystats.py)|  [Python statistic Tool](https://github.com/xizhonghua/pystats),process repetition results to get mean, variances, confidential interval etc|
 
 ### Simulation: Compare FirstFit, BestFit
