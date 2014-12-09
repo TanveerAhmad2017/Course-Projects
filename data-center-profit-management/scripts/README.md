@@ -7,8 +7,7 @@
 |[runSim.py](./runSim.py)| simulation with input from [data](../data), output to [result](../result)
 |[pystats.py](./pystats.py)|  [Python statistic Tool](https://github.com/xizhonghua/pystats),process repetition results to get mean, variances, confidential interval etc|
 |[processSim.py](./processSim.py)| process simulation result|
-
-
+|[copyFileSettingToLingo.bat](./copyFileSettingToLingo.bat)| copy settings from ./data folder to lingo-opt folder, since Lingo requires the setting files to in the execution directory|
 
 ### Generate Simulation Input
 
