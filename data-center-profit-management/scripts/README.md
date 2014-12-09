@@ -14,6 +14,8 @@
 |[processSim.py](./processSim.py)| process simulation result produced by [runSim.py](./runSim.py)|
 
 - Parameter setting
+  - set parameters in main function
+  - TODO: using input arguments to set parameters would be better
 - How to run
 ```
 python runSim.py
@@ -25,7 +27,16 @@ python processSim.py
 |:----|:-------|
 |[oneOPTSimulation.py](./oneOPTSimulation.py)| Simulations to compare OPT, FirstFit and BestFit| 
 |[processAvgOPT.py](./processAvgOPT.py)| Process the result of [oneOPTSimulation.py](./oneOPTSimulation.py) to get the average profit of OPT, FirstFit and BestFit|
-|[copyFileSettingToLingo.bat](./copyFileSettingToLingo.bat)| copy settings from ./data folder to lingo-opt folder, since Lingo requires the setting files to in the execution directory|
+|[copyFileSettingToLingo.bat](./copyFileSettingToLingo.bat)| copy settings from `./data` folder to lingo-opt folder, since Lingo requires the setting files to in the execution directory, this script will be called by [oneOPTSimulation.py](./oneOPTSimulation.py)|
+- How to run
+For each repeatition
+```
+python oneOPTSimulation.py
+```
+Run LINGO
+```
+python processAvgOPT.py
+```
 
 ### Input Date
 |File| Contents|
