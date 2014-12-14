@@ -3,7 +3,7 @@
 ### Intro
 - CS773 course project, 2014 Fall
 - [CS773 course website](http://cs.gmu.edu/syllabus/syllabi-fall14/CS773AydinH.html)
-- Instructor: Dr. Hakan Aydin
+- [Instructor: Dr. Hakan Aydin](http://cs.gmu.edu/~aydin/)
 
 ### Objective
 - Design and implement offline optimal algorithm to management profit in data center
