@@ -2,11 +2,14 @@ function plotOPTFFBF(metrixType, arrivalrate, setting)
     %Build Figure
     setting = '48-16-10';
     
-    opt = [578.1, 1631.8 2741.6 1  3154.5   ]
-    ff = [461.6, 1287.8  2263.8   1 2964.5 ]
-    bf = [535.8, 1557.6  2398.4 1 2920.0  ]
+    opt = [578.1, 1631.8 2245.0 2741.6  2860.0  3154.5   ]
+    ff = [461.6, 1287.8   1792.6 2263.8   2619.5 2964.5 ]
+    bf = [535.8, 1557.6  1996.0 2398.4 2641.0 2920.0  ]
 
-
+firstfit6666667 595.371339053
+bestfit  598.3214698
+workload 722222222 0.208731113795
+opt  1867.81209626
 
     figure1 = figure;
     set(figure1,'units','normalized','outerposition',[0 0 1 1], 'visible','on');
@@ -18,7 +21,7 @@ function plotOPTFFBF(metrixType, arrivalrate, setting)
 
 
     %set x,y axis
-    x=[0.2 0.6 1.0 1.2 1.4]
+    x=[0.2 0.6 0.8 1.0 1.2 1.4]
     
     %plot and set font, line type
     p = plot(x(1,:),opt(1,:));
@@ -52,7 +55,7 @@ function plotOPTFFBF(metrixType, arrivalrate, setting)
 
     %set x tick and y tick
     %set(axes1,'YTick',[0.2,0.4,0.6,0.8,1.0],'YTickLabel',{'20%','40%','60%','80%','100%'},'XGrid','on','YGrid','on');
-   set(axes1,'XTick',[0.2 0.6 1.0 1.2 1.4],'XTickLabel',[0.2 0.6 1.0 1.2 1.4],'XGrid','on','YGrid','on');
+   set(axes1,'XTick',[0.2 0.6 0.8 1.0 1.2 1.4],'XTickLabel',[0.2 0.6 0.8 1.0 1.2 1.4],'XGrid','on','YGrid','on');
 
     %set grid on 
     set(axes1,'XGrid','on','YGrid','on');

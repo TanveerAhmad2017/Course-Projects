@@ -2,7 +2,7 @@ function avgWorkload()
     %Build Figure
     setting = '48-16-10';
     
-   workload = [ 0.09 0.30 0.43 0.658984375  0.7513 1.104]
+   workload = [ 0.09 0.30 0.409 0.658984375  0.7513 1.104]
 
     figure1 = figure;
     set(figure1,'units','normalized','outerposition',[0 0 1 1], 'visible','on');
@@ -33,7 +33,7 @@ function avgWorkload()
     %set x range and y range
     upper = max( workload(1,:))
 
-     upper = ceil(upper/0.1)*0.1;        
+     upper = ceil(upper/1)*1;        
  
             
     axis([0.19 1.4 0 upper])  

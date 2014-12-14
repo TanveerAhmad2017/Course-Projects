@@ -34,4 +34,4 @@ def processAvgOPT(rate):
 		print 'opt',   res[2], (float)(res[9][1] - res[2])
 
 if __name__ == "__main__":
-	processAvgOPT(1.2)
+	processAvgOPT(0.8)

@@ -3,7 +3,7 @@ from generateSetting import *
 import os
 
 def oneOPTSimulation(rate):
-	generateSetting(arrivalrate = rate)
+	generateSetting(times = rate)
 
 
 	## execute firstfit, bestfit
@@ -40,4 +40,4 @@ def oneOPTSimulation(rate):
 
 
 if __name__ == "__main__":
-	oneOPTSimulation(0.8)
+	oneOPTSimulation(24)
