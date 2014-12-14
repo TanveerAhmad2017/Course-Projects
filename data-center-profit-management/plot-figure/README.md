@@ -15,6 +15,5 @@
 - sample figure:
 
 ### Compare FirstFit, BestFit and Optimal Offline
-- code:
-- how to plot
-- sample figure
+- code: [plotOPTFFBF.m](./plotOPTFFBF.m)
+
