@@ -19,3 +19,4 @@
 |Name| Function|
 |:----|:-------|
 |[GreenDC-Schedule](./GreenDC-Schedule)| Implement FirstFit and BestFit in C#|
+|[data](./data)| Simulation settings|
