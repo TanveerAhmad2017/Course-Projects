@@ -38,6 +38,6 @@ Simulation.exe OUTPUT-PATH SCHEDULER
 
 
 ### How to run?
-
+- compile to exe, then call by [scripts](./scripts)
 
 
