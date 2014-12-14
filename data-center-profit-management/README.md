@@ -18,9 +18,9 @@
 ### Overview of folders
 |Name| Function|
 |:----|:-------|
-|[GreenDC-Schedule](./GreenDC-Schedule)| Implement FirstFit and BestFit, writing in C#|
+|[GreenDC-Schedule](./GreenDC-Schedule)| Implement FirstFit and BestFit, written in C#|
 |[data](./data)| Simulation settings|
-|[lingo-opt](./lingo-opt)| Implementation of optimal offline algorithm, writing in LINGO solver|
-|[plot-figure](./plot-figure)| Plot figures for writing report, writing in Matlab|
+|[lingo-opt](./lingo-opt)| Implementation of optimal offline algorithm, written in LINGO solver|
+|[plot-figure](./plot-figure)| Plot figures for writing report, written in Matlab|
 |[result](./result)| Simulation result|
-|[scripts](./scripts)| Scripts for running different simulations, writing in Python|
+|[scripts](./scripts)| Scripts for running different simulations, written in Python|
