@@ -20,3 +20,4 @@
 |:----|:-------|
 |[GreenDC-Schedule](./GreenDC-Schedule)| Implement FirstFit and BestFit in C#|
 |[data](./data)| Simulation settings|
+|[lingo-opt](./lingo-opt)| Implementation of optimal offline algorithm, in LINGO solver|
