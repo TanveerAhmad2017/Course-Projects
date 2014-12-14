@@ -14,3 +14,8 @@
 - We implement two heuristic algorithms FirstFit and BestFit
 - We evaluate the running time of optimal offline algorithm (OPT) under different settings
 - We evaluate the performance of heuristic algorithms FirstFit and BestFit against OPT
+
+### Overview of folders
+|Name| Function|
+|:----|:-------|
+|
