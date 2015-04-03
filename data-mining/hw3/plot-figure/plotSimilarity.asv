@@ -1,0 +1,30 @@
+%preprocess data
+dataName = 'dataset1-KMean5';
+data1 = load(strcat('..\processed-data\',dataName,'.txt'));
+sortedData1 =sortrows(data1, 6);
+sortedData1 = sortedData1(:,1:5);
+
+instanceNum = size(sortedData1,1);
+
+%euclidean distance
+proximity = pdist2(sortedData1,sortedData1);
+ proximity = ones(instanceNum, instanceNum) - (proximity)/max(max(proximity));
+
+%plot figure
+figure1 = figure;
+set(figure1,'units','normalized','outerposition',[0 0 1 1]);
+imagesc(proximity)
+colorbar
+
+set(axes1,'YTick',[100:],'YTickLabel',{'20%','40%','60%','80%','100%'},'XGrid','on','YGrid','on');
+
+%set x, y Label
+set(get(axes1,'XLabel'),'String','x','FontSize',30,'FontWeight','bold');
+set(get(axes1,'YLabel'),'String','y','FontSize',30,'FontWeight','bold');
+
+% %save to file
+set(gcf, 'PaperPosition', [0 0 13 7]); %Position plot at left hand corner with width 5 and height 5.
+set(gcf, 'PaperSize', [13 7]); %Set the paper to have width 5 and height 5.
+%saveas(gcf, 'SolarTrace_High', 'pdf') %Save figure
+saveas(gcf, strcat('.\\figs\',dataName), 'pdf') %Save figure  
+saveas(gca, strcat('.\\figs',dataName, '.eps'),'psc2') %Save figure 
