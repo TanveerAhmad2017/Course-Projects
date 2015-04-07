@@ -4,9 +4,9 @@
 function computeCorrelation(dataName)
 
 data1 = load(strcat('..\processed-data\',dataName,'.txt'));
-sortedData1 =sortrows(data1, 1:6);
-clusters = sortedData1(:,6);
-attributes = sortedData1(:,1:5);
+sortedData1 =sortrows(data1, 7);
+clusters = sortedData1(:,7);
+attributes = sortedData1(:,2:6);
 
 instanceNum = size(clusters,1);
 
