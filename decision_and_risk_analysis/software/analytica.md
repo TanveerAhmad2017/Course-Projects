@@ -8,5 +8,5 @@
   - [Intelligent Arrays](https://www.youtube.com/watch?v=ILR6G2T4zuM&index=3&list=UUFAz5G-ylhl8gGphN50QlTw)
   
 
-- [notes]
+- Notes
   - [Covert influence diagram to decision tree](http://wiki.lumina.com/index.php/Encoding_Decision_Trees)
