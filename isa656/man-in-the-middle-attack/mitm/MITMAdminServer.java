@@ -1,0 +1,264 @@
+/**
+ * CS255 project 2
+ */
+
+package mitm;
+
+import java.net.*;
+import java.nio.ByteBuffer;
+import java.io.*;
+import java.security.GeneralSecurityException;
+import java.util.*;
+import java.util.regex.*;
+
+class MITMAdminServer implements Runnable
+{
+    private ServerSocket m_serverSocket;
+    private Socket m_socket = null;
+    private HTTPSProxyEngine m_engine;
+    private Hashtable hs = new Hashtable<String, Integer>();
+    private Random rd = new Random();
+    private String msgBuffer = "";
+    
+    //saltedPwdHash
+    private Vector<byte[][]> m_saltedPwdHash = null;
+    
+    public MITMAdminServer( String localHost, int adminPort, HTTPSProxyEngine engine) throws IOException,GeneralSecurityException {
+		
+    	MITMSSLSocketFactory socketFactory = new MITMSSLSocketFactory();
+		m_serverSocket = socketFactory.createServerSocket( localHost, adminPort, 0 );
+		m_engine = engine;
+		
+		//read pwdfile from disk
+		m_saltedPwdHash = Utility.ReadPwdFile();
+    }
+
+	public void run() {
+		System.out.println("Admin server initialized, listening on port "
+				+ m_serverSocket.getLocalPort());
+		while (true) {
+			try {
+				m_socket = m_serverSocket.accept();
+
+			
+				// Read a buffer full.
+				while(true)
+				{
+					String msg = this.readMessage();
+
+					//System.out.println("Server receive meesage from client: \n" + msg.toString());
+
+					boolean finished = requestHandler(msg);
+					if(finished) break;
+				}
+
+			} catch (InterruptedIOException e) {
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+    
+	private String readMessage() throws IOException
+	{
+		byte[] buffer = new byte[40960];
+		
+		while(true)
+		{
+			BufferedInputStream in = new BufferedInputStream(
+					m_socket.getInputStream(), buffer.length);
+	
+			int bytesRead = in.read(buffer);
+		
+			String str = bytesRead > 0 ? new String(buffer, 0, bytesRead) : "";
+			
+			msgBuffer += str;
+			
+			int p = msgBuffer.indexOf("$$");
+			
+			if(p > 0) {
+				String msg = msgBuffer.substring(0, p);
+				msgBuffer = msgBuffer.substring(p+2);
+				return msg;
+			}
+		}
+	}
+    
+    private boolean requestHandler(String line)
+    {
+    	Pattern initConnectPattern = Pattern.compile("initusername:(\\S+)\\s+challenge:(\\S+)");
+		
+		Pattern userPwdPattern =
+		    //Pattern.compile("password:(\\S+)\\s+command:(\\S+)\\sCN:(\\S*)\\s");
+				Pattern.compile("username:(\\S+)\\s+password:(\\S+)\\s+command:(\\S+)\\s+CN:(\\S*)\\s+verification:(\\S+)");		
+		
+		Matcher userPwdMatcher =
+		    userPwdPattern.matcher(line);
+		
+		Matcher initConnectMatcher =
+				initConnectPattern.matcher(line);
+		
+		if(userPwdMatcher.find())  {
+			handleAuthenticate(userPwdMatcher);
+			return true;
+		}
+		
+		if(initConnectMatcher.find())  handleInitial(initConnectMatcher);
+		return false;
+    }
+    
+    private void handleInitial(Matcher initConnectMatcher)
+    {
+    	System.out.println("initConnect match!");
+		String username = initConnectMatcher.group(1);
+		Integer clientChallenge = Integer.parseInt(initConnectMatcher.group(2));
+		System.out.println("Server receive request, username= "+username+", challenge="+clientChallenge);
+		int challenge = rd.nextInt();
+		int verification = sharedSecret(clientChallenge,challenge);
+	
+		hs.put(username, verification);
+		try {
+			sendString("challenge:"+challenge+"verification:"+verification);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Server send challenge and verification to client, challenge=: "+ challenge+" verification:"+verification);
+    	
+    }
+    
+    private void handleAuthenticate(Matcher userPwdMatcher)
+    {
+    	//System.out.println("userPwdMatcher find!");
+		String username = userPwdMatcher.group(1);
+	    String password = userPwdMatcher.group(2);
+	    String verification = userPwdMatcher.group(5);
+	    //System.out.println("Server check challenge: "+verification);
+	    boolean authenticated = true;
+	    if(!verification.equals(hs.get(username).toString())) 
+	    {
+	    	System.out.println("Wrong challenge, challenge should be: "+hs.get(username).toString());
+	    	authenticated = false;
+	    }else
+	    {
+	    	try {
+				authenticated = authenticate(username,password);
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    }
+	    
+	  
+	    // TODO(cs255): authenticate the user
+
+	    //boolean authenticated = true;
+
+	    // if authenticated, do the command
+	    if( authenticated ) {
+		String command = userPwdMatcher.group(3);
+		String commonName = userPwdMatcher.group(4);
+		System.out.println("Client be authenticated by server!");
+		try {
+			doCommand( command );
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    }else{
+			System.err.println("Wrong username or password, username= "+ username);
+			System.exit(1);
+		}
+    }
+    
+
+    private void sendString(final String str) throws IOException {
+	PrintWriter writer = new PrintWriter( m_socket.getOutputStream() );
+	writer.println(str);
+	writer.flush();
+    }
+    
+    private static Integer sharedSecret(Integer x, Integer y)
+	{
+		return x*y-6;
+	}
+    
+    private void doCommand( String cmd ) throws IOException {
+
+	// TODO(cs255): instead of greeting admin client, run the indicated command
+
+//	sendString("How are you Admin Client !!");
+//
+//	m_socket.close();
+    	
+    	String c = cmd.toLowerCase();
+    	if(c.equals("stats"))
+    	{
+//    		Scanner s = new Scanner( new FileInputStream(JSSEConstants.STATS_FILE));
+//    		int connections = s.nextInt();
+    		try{
+    			m_socket.getOutputStream().write(("nnumber of requests proxied:" + mitm.HTTPSProxyEngine.stat_num).getBytes());
+    		}catch(Exception e)
+    		{
+    			e.printStackTrace();
+    		}
+    	}
+    	else if(c.equals("shutdown"))
+    	{
+    		//xin
+    		//m_serverSocket.close();
+    		System.out.println("Server has been shut down");
+    		System.exit(1);
+    	}
+    	m_socket.close();
+    }
+    
+    
+    private boolean authenticate(String username, String password) throws UnsupportedEncodingException
+    {
+    	System.out.println("username: "+ username);
+    	System.out.println("password: "+ password);
+    	
+    	ByteBuffer userBytes = ByteBuffer.allocate(100);
+    	userBytes.put(username.getBytes("UTF-8"));
+    	
+    	byte[] user = userBytes.array();
+    	byte[] salt =null;
+    	byte[] hashpwd = null;
+    	
+    	
+    	for(int i=0; i<m_saltedPwdHash.size(); i++)
+    	{
+    		byte[][] entry = m_saltedPwdHash.elementAt(i);
+//    		System.out.println("m_saltedPwdHash entry[0]: "+ Utility.ByteToString(entry[0]));
+//    		System.out.println("user: "+ Utility.ByteToString(user));
+    		if(BytesEqual(user,entry[0]))
+    		{    			
+    			salt = entry[1];
+    			hashpwd = entry[2];
+    		}
+    	}
+    	
+    	if(salt==null || hashpwd==null) return false;
+    	Aes aes = new Aes(Utility.pwdEncryptKey);
+    	byte[] saltedPwd = Utility.concat2byte(salt, password.getBytes());   		
+		byte[] hashResult = aes.hmac.getmac(saltedPwd);
+		byte[] fixedLengthhashResult = new byte[30];
+		fixedLengthhashResult = Arrays.copyOf(hashResult, fixedLengthhashResult.length);
+		if(BytesEqual(hashpwd,fixedLengthhashResult)) return true;
+		return false;
+    }
+    
+    public static boolean BytesEqual(byte[] bytes1, byte[] bytes2)
+    {
+    	if(bytes1.length != bytes2.length)
+    		return false;
+    	for(int i=0; i<bytes1.length; i++)
+    	{
+    		if(bytes1[i] != bytes2[i])
+    			return false;
+    	}
+    	return true;
+    }
+
+}
